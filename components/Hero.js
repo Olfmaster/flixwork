@@ -96,14 +96,14 @@ export default function Hero() {
         </div>
 
         {/* Vertrauens-Kennzahlen */}
-        <div className="mt-14 grid max-w-2xl grid-cols-3 gap-6 border-t border-white/15 pt-8">
+        <div className="mt-14 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-8 sm:gap-6">
           {[
             { n: "3", l: "Schwerpunkte: Logistik, Industrie, Handwerk" },
             { n: "bundesweit", l: "Einsatzorte in ganz Deutschland" },
             { n: "persönlich", l: "Fester Ansprechpartner statt Hotline" },
           ].map((s) => (
             <div data-stat key={s.l}>
-              <p className="text-xl font-bold text-white md:text-2xl">{s.n}</p>
+              <p className="text-base font-bold text-white sm:text-xl md:text-2xl">{s.n}</p>
               <p className="mt-1 text-xs leading-snug text-white/60">{s.l}</p>
             </div>
           ))}
