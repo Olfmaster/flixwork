@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* ---- Flixwork Corporate Identity ---- */
+  /* Primärfarbe laut Briefing: RGB 28/45/90 */
+  --color-navy: #1c2d5a;
+  --color-navy-deep: #131f3d;
+  --color-navy-700: #243a70;
+  --color-navy-500: #3a539b;
+  --color-sky: #3d6ad6;
+  --color-sky-soft: #6f96e8;
+  --color-mist: #f4f7fc;
+  --color-cloud: #e9f0fb;
+  --color-ink: #1c2d5a;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sticky-Header-Offset für Anker-Sprünge */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+::selection {
+  background-color: var(--color-sky);
+  color: #fff;
+}
+
+/* Laufband (Branchen-Marquee) */
+@keyframes flx-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.flx-marquee {
+  animation: flx-marquee 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .flx-marquee {
+    animation: none;
+  }
+}
+
+/* Weicher Verlauf für die Navy-Hero-Fläche */
+.flx-hero-bg {
+  background:
+    radial-gradient(60% 80% at 15% 10%, #243a70 0%, transparent 60%),
+    radial-gradient(50% 70% at 90% 20%, #2a4488 0%, transparent 55%),
+    linear-gradient(160deg, #1c2d5a 0%, #131f3d 100%);
+}
