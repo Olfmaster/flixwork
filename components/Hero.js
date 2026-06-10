@@ -25,7 +25,7 @@ export default function Hero() {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
           .from("[data-h]", { y: 30, opacity: 0, duration: 0.9, stagger: 0.12 })
-          .from("[data-cta]", { y: 20, opacity: 0, duration: 0.7, stagger: 0.1 }, "-=0.4")
+          .from("[data-cta-row]", { y: 20, opacity: 0, duration: 0.7 }, "-=0.4")
           .from("[data-stat]", { y: 16, opacity: 0, duration: 0.6, stagger: 0.08 }, "-=0.3");
 
         // sanft schwebende Formen
@@ -74,9 +74,8 @@ export default function Hero() {
         </p>
 
         {/* Besucher-Weiche */}
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-stretch">
+        <div data-cta-row className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <a
-            data-cta
             href="#schwerpunkte"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-transparent bg-sky px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky/25 transition-transform hover:scale-[1.03] hover:bg-sky-soft sm:w-auto"
           >
@@ -84,7 +83,6 @@ export default function Hero() {
             <span aria-hidden="true">→</span>
           </a>
           <a
-            data-cta
             href={`${MAIN_SITE}/jobboerse`}
             target="_blank"
             rel="noopener"
