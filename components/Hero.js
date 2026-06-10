@@ -74,11 +74,11 @@ export default function Hero() {
         </p>
 
         {/* Besucher-Weiche */}
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <a
             data-cta
             href="#schwerpunkte"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-sky px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky/25 transition-transform hover:scale-[1.03] hover:bg-sky-soft"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-transparent bg-sky px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky/25 transition-transform hover:scale-[1.03] hover:bg-sky-soft sm:w-auto"
           >
             Ich suche Personal
             <span aria-hidden="true">→</span>
@@ -88,7 +88,7 @@ export default function Hero() {
             href={`${MAIN_SITE}/jobboerse`}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
           >
             Ich suche einen Job
             <span aria-hidden="true" className="text-white/60">↗ Jobbörse</span>
