@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import logo from "@/public/flix-logo.png";
+import logo from "@/public/flixwork-logo.png";
 
 // Bestehende Flixwork-Hauptnavigation. Die Bewerber-/Info-Punkte verweisen auf
 // die bestehende Website (Bewerberwelt); "Unternehmen" ist diese neue Seite.
@@ -59,7 +59,7 @@ export default function Navbar() {
             src={logo}
             alt="Flixwork"
             priority
-            className={`h-9 w-auto md:h-10 transition ${
+            className={`h-10 w-auto md:h-12 transition ${
               solid ? "" : "[filter:brightness(0)_invert(1)]"
             }`}
           />

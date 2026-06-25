@@ -35,12 +35,12 @@ const bereiche = [
     titel: "Monteure, die morgen bei Ihnen vor Ort starten.",
     text: "Gegen den Fachkräftemangel: erfahrene europäische Monteure, die bundesweit operieren können — mit eigenem Auto und eigenem Werkzeug. Stellen Sie sich Ihren Monteur im Konfigurator selbst zusammen.",
     usps: [
-      ["Europäische Fachkräfte", "Erfahrene Monteure für Elektro, Sanitär und Montage."],
+      ["Europäische Fachkräfte", "Erfahrene Monteure für Elektro, SHK und Versorgungstechnik."],
       ["Mobil & ausgestattet", "Eigenes Auto und eigenes Werkzeug — sofort einsatzfähig."],
       ["Bundesweit", "Einsatz vor Ort, egal wo in Deutschland — auch mehrtägig."],
     ],
     panelTitel: "Fachgebiete",
-    panel: ["Elektro", "Sanitär & Heizung", "Trockenbau", "Allgemeine Montage", "Mehrtägige Einsätze"],
+    panel: ["Elektro", "Sanitär, Heizung & Klima", "Versorgungstechnik", "Mehrtägige Einsätze"],
     cta: { label: "Monteur konfigurieren", href: "#konfigurator" },
   },
 ];

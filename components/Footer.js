@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/public/flix-logo.png";
+import logo from "@/public/flixwork-logo.png";
 
 const MAIN_SITE = "https://www.flixwork.de";
 
@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-14 md:px-8">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Image src={logo} alt="Flixwork" className="h-10 w-auto [filter:brightness(0)_invert(1)]" />
+            <Image src={logo} alt="Flixwork" className="h-12 w-auto [filter:brightness(0)_invert(1)]" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
               Inhabergeführter B2B-Personaldienstleister für Logistik, Industrie
               und Handwerk — bundesweit, professionell & zuverlässig.
