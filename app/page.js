@@ -6,7 +6,7 @@ import Kennzahlen from "@/components/Kennzahlen";
 import Referenzen from "@/components/Referenzen";
 import Testimonials from "@/components/Testimonials";
 import Erfolgsgeschichten from "@/components/Erfolgsgeschichten";
-import AnfrageFragebogen from "@/components/AnfrageFragebogen";
+import AnfrageFormular from "@/components/AnfrageFormular";
 import AbschlussCTA from "@/components/AbschlussCTA";
 import Footer from "@/components/Footer";
 
@@ -22,7 +22,7 @@ export default function Home() {
         <Referenzen />
         <Testimonials />
         <Erfolgsgeschichten />
-        <AnfrageFragebogen />
+        <AnfrageFormular />
         <AbschlussCTA />
       </main>
       <Footer />
