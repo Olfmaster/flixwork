@@ -2,6 +2,7 @@ import BereichHero from "@/components/BereichHero";
 import BereichUsps from "@/components/BereichUsps";
 import MonteurKonfigurator from "@/components/MonteurKonfigurator";
 import Referenzen from "@/components/Referenzen";
+import AbschlussCTA from "@/components/AbschlussCTA";
 import Footer from "@/components/Footer";
 import { bereiche } from "@/lib/bereiche";
 
@@ -22,6 +23,7 @@ export default function HandwerkPage() {
         <BereichUsps b={b} />
         <MonteurKonfigurator />
         <Referenzen />
+        <AbschlussCTA kontaktHref="#konfigurator" kontaktLabel="Monteur konfigurieren" />
       </main>
       <Footer />
     </>

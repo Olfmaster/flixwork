@@ -3,6 +3,7 @@ import BereichUsps from "@/components/BereichUsps";
 import ExpressShuttle from "@/components/ExpressShuttle";
 import Referenzen from "@/components/Referenzen";
 import AnfrageFragebogen from "@/components/AnfrageFragebogen";
+import AbschlussCTA from "@/components/AbschlussCTA";
 import Footer from "@/components/Footer";
 import { bereiche } from "@/lib/bereiche";
 
@@ -24,6 +25,7 @@ export default function LogistikPage() {
         <ExpressShuttle />
         <Referenzen />
         <AnfrageFragebogen defaultBranche="logistik" />
+        <AbschlussCTA />
       </main>
       <Footer />
     </>
