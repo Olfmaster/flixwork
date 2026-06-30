@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import Counter from "./Counter";
 
 // Eigenständiges USP-Highlight aus dem Datenblatt: eigene Mobilitätslösung
 // "Express Shuttle" für mit ÖPNV schwer erreichbare Logistikstandorte,
@@ -41,7 +42,7 @@ export default function ExpressShuttle() {
           <Reveal y={36} className="space-y-5">
             <div className="rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Shuttle-Kapazität</p>
-              <p className="mt-2 text-6xl font-bold text-sky-soft">150</p>
+              <Counter to={150} className="mt-2 block text-6xl font-bold text-sky-soft" />
               <p className="mt-1 text-sm text-white/70">Mitarbeiter pro Einsatz transportierbar</p>
             </div>
             <ul className="space-y-4">

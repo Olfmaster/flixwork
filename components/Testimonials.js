@@ -9,7 +9,7 @@ const stimmen = [
     quote:
       "Wenn wir Personal suchen, ist unsere erste Adresse Matthias Dierkes von Flixwork. Er betreut uns seit vielen Jahren — zuverlässig, vor Ort und schnell.",
     firma: "FingerHaus",
-    kontext: "Hausbau · Musterhaus Frankenberg",
+    kontext: "Fertighaus-Hersteller · Frankenberg",
   },
   {
     quote:
@@ -44,7 +44,7 @@ export default function Testimonials() {
           {stimmen.map((s) => (
             <figure
               key={s.firma}
-              className="flex flex-col rounded-2xl border border-navy/10 bg-white p-7 transition-shadow hover:shadow-lg hover:shadow-navy/5"
+              className="flex flex-col rounded-2xl border border-navy/10 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
             >
               <svg viewBox="0 0 24 24" className="h-9 w-9 text-sky/30" fill="currentColor" aria-hidden="true">
                 <path d="M9.5 7C6.5 7 5 9.2 5 12v5h5v-5H7.5c0-1.7.8-2.5 2.5-2.5V7zm9 0c-3 0-4.5 2.2-4.5 5v5h5v-5H16c0-1.7.8-2.5 2.5-2.5V7z" />

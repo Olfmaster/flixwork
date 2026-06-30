@@ -44,7 +44,7 @@ export default function WarumFlixwork() {
             {werte.map((w, i) => (
               <div
                 key={w.titel}
-                className="rounded-2xl border border-navy/10 bg-white p-6 transition-shadow hover:shadow-lg hover:shadow-navy/5"
+                className="rounded-2xl border border-navy/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
               >
                 <div className="flex items-start gap-4">
                   <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cloud text-sm font-bold text-navy">

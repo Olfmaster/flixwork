@@ -85,7 +85,7 @@ export default function MonteurKonfigurator() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky">Handwerk · Konfigurator</p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy md:text-4xl">
-            Bau dir deinen Monteur zusammen.
+            Stellen Sie sich Ihren Monteur zusammen.
           </h2>
           <p className="mt-4 text-navy/60">
             In zwei Minuten zur Schätzung: Tarif und Fachgebiet wählen, Optionen

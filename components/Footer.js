@@ -17,15 +17,15 @@ export default function Footer() {
           </div>
 
           <FooterCol title="Bereiche">
-            <FooterLink href="#logistik">Logistik</FooterLink>
-            <FooterLink href="#industrie">Industrie</FooterLink>
-            <FooterLink href="#handwerk">Handwerk</FooterLink>
-            <FooterLink href="#konfigurator">Monteur-Konfigurator</FooterLink>
+            <FooterLink href="/logistik">Logistik</FooterLink>
+            <FooterLink href="/industrie">Industrie</FooterLink>
+            <FooterLink href="/handwerk">Handwerk</FooterLink>
+            <FooterLink href="/handwerk#konfigurator">Monteur-Konfigurator</FooterLink>
           </FooterCol>
 
           <FooterCol title="Unternehmen">
-            <FooterLink href="#warum">Warum Flixwork</FooterLink>
-            <FooterLink href="#anfrage">Personal anfragen</FooterLink>
+            <FooterLink href="/#warum">Warum Flixwork</FooterLink>
+            <FooterLink href="/#anfrage">Personal anfragen</FooterLink>
             <FooterLink href={`${MAIN_SITE}/jobboerse`} external>Jobbörse</FooterLink>
             <FooterLink href={`${MAIN_SITE}/about`} external>Über uns</FooterLink>
           </FooterCol>

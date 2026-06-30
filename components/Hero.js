@@ -2,7 +2,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-const MAIN_SITE = "https://www.flixwork.de";
 const branchen = [
   "Logistik",
   "Industrie",
@@ -24,9 +23,8 @@ export default function Hero() {
       if (!reduce) {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
-          .from("[data-h]", { y: 30, opacity: 0, duration: 0.9, stagger: 0.12 })
-          .from("[data-cta-row]", { y: 20, opacity: 0, duration: 0.7 }, "-=0.4")
-          .from("[data-stat]", { y: 16, opacity: 0, duration: 0.6, stagger: 0.08 }, "-=0.3");
+          .from("[data-h]", { y: 34, opacity: 0, duration: 0.9, stagger: 0.14 })
+          .from("[data-cta-row]", { y: 20, opacity: 0, duration: 0.7 }, "-=0.4");
 
         // sanft schwebende Formen
         gsap.to("[data-blob]", {
@@ -45,11 +43,9 @@ export default function Hero() {
 
   return (
     <section ref={root} className="flx-hero-bg relative overflow-hidden text-white">
-      {/* dekorative Formen */}
+      {/* dezente Lichtakzente — bewusst zurückhaltend für eine ruhige, flächige Hero */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <span data-blob className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-sky/25 blur-3xl" />
-        <span data-blob className="absolute right-[-6rem] top-10 h-80 w-80 rounded-full bg-sky-soft/20 blur-3xl" />
-        <span data-blob className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+        <span data-blob className="absolute right-[-8rem] top-0 h-96 w-96 rounded-full bg-sky-soft/10 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-36 md:px-8 md:pb-28 md:pt-44">
@@ -61,50 +57,26 @@ export default function Hero() {
           Inhabergeführt · bundesweit · B2B-Personaldienstleister
         </p>
 
-        <h1 data-h className="max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-          Wir finden qualifiziertes Personal für{" "}
+        <h1 data-h className="max-w-5xl text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
+          Qualifiziertes Personal für{" "}
           <span className="text-sky-soft">Ihr Unternehmen</span>
         </h1>
 
-        <p data-h className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
+        <p data-h className="mt-7 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
           Überlassung von Fach-, Führungs- und Hilfskräften in{" "}
           <strong className="font-semibold text-white">Logistik, Industrie und Handwerk</strong>{" "}
           — professionell, zuverlässig und persönlich betreut. Vom einzelnen
           Monteur bis zum kompletten Projektteam.
         </p>
 
-        {/* Besucher-Weiche */}
-        <div data-cta-row className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-stretch">
+        <div data-cta-row className="mt-10">
           <a
             href="#schwerpunkte"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-transparent bg-sky px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky/25 transition-transform hover:scale-[1.03] hover:bg-sky-soft sm:w-auto"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-sky px-9 py-4 text-base font-semibold text-white shadow-lg shadow-sky/30 transition-transform hover:scale-[1.03] hover:bg-sky-soft"
           >
-            Ich suche Personal
+            Jetzt Personal anfragen
             <span aria-hidden="true">→</span>
           </a>
-          <a
-            href={`${MAIN_SITE}/jobboerse`}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
-          >
-            Ich suche einen Job
-            <span aria-hidden="true" className="text-white/60">↗ Jobbörse</span>
-          </a>
-        </div>
-
-        {/* Vertrauens-Kennzahlen */}
-        <div className="mt-14 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-8 sm:gap-6">
-          {[
-            { n: "3", l: "Schwerpunkte: Logistik, Industrie, Handwerk" },
-            { n: "bundesweit", l: "Einsatzorte in ganz Deutschland" },
-            { n: "persönlich", l: "Fester Ansprechpartner statt Hotline" },
-          ].map((s) => (
-            <div data-stat key={s.l}>
-              <p className="text-base font-bold text-white sm:text-xl md:text-2xl">{s.n}</p>
-              <p className="mt-1 text-xs leading-snug text-white/60">{s.l}</p>
-            </div>
-          ))}
         </div>
       </div>
 

@@ -146,8 +146,8 @@ function SubmitButton() {
   );
 }
 
-export default function AnfrageFragebogen() {
-  const [bereich, setBereich] = useState("logistik");
+export default function AnfrageFragebogen({ defaultBranche = "logistik" }) {
+  const [bereich, setBereich] = useState(defaultBranche);
   const [answers, setAnswers] = useState(defaults);
   const [step, setStep] = useState(0);
   const [state, formAction] = useActionState(sendAnfrage, initial);

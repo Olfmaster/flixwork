@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "@/public/flixwork-logo.png";
 
-// Bestehende Flixwork-Hauptnavigation. Die Bewerber-/Info-Punkte verweisen auf
-// die bestehende Website (Bewerberwelt); "Unternehmen" ist diese neue Seite.
+// Hauptnavigation: die drei Geschäftsbereiche als eigene Unterseiten, dazu die
+// Jobbörse der bestehenden Bewerberwelt. Logo führt zur Unternehmens-Startseite.
 // TODO: MAIN_SITE auf die echte Domain der bestehenden Seite setzen.
 const MAIN_SITE = "https://www.flixwork.de";
 const links = [
+  { label: "Logistik", href: "/logistik", external: false },
+  { label: "Industrie", href: "/industrie", external: false },
+  { label: "Handwerk", href: "/handwerk", external: false },
   { label: "Jobbörse", href: `${MAIN_SITE}/jobboerse`, external: true },
-  { label: "News & FAQ", href: `${MAIN_SITE}/news`, external: true },
-  { label: "About", href: `${MAIN_SITE}/about`, external: true },
-  { label: "Unternehmen", href: "/", external: false },
 ];
 
 const socials = [

@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import Counter from "./Counter";
 
 // Praxis-/Erfolgsgeschichten aus "teste.docx" — bewusst in Flixwork-Innensicht
 // (OnSite-Manager / Geschäftsführer), daher als eigener Block neben den
@@ -7,7 +8,7 @@ const stories = [
   {
     firma: "Radial",
     meta: "E-Commerce Logistik · Kassel & Staufenberg",
-    metric: { value: "5+ Jahre", label: "Master-Partner im OnSite Management" },
+    metric: { to: 5, plus: true, unit: "Jahre", label: "Master-Partner im OnSite Management" },
     text: "Als Master-Partner steuern wir seit über fünf Jahren das OnSite Management an zwei Standorten — vom Helfer über Teamleiter bis zu hochqualifizierten Staplerfahrern und Office-Kräften.",
     quote: "Ich gehe durch die Hallen und sehe alte und neue bekannte Gesichter, die ich in den letzten 5 Jahren vermitteln durfte.",
     autor: "Enrico Kroll · OnSite Manager",
@@ -15,7 +16,7 @@ const stories = [
   {
     firma: "W&L Jordan (JOKA)",
     meta: "Zentrallager Logistik · Kassel",
-    metric: { value: "15+ Jahre", label: "Partnerschaft & begleitete Übernahmen" },
+    metric: { to: 15, plus: true, unit: "Jahre", label: "Partnerschaft & begleitete Übernahmen" },
     text: "Seit über 15 Jahren begleiten wir das Zentrallager in Kassel — vom Helfer bis zum hochkomplexen Staplerfahrer. Wir haben das Wachstum aktiv mitgestaltet und Jahr für Jahr Übernahmen in die Stammbelegschaft ermöglicht.",
     quote: "Ich sehe regelmäßig ehemalige Mitarbeiter, die sich hochgearbeitet haben und heute Teamleiter sind.",
     autor: "André Fissler · Geschäftsführer",
@@ -23,7 +24,7 @@ const stories = [
   {
     firma: "Geis Industrie-Service",
     meta: "Fulfillment Logistik · Göttingen / Rosdorf",
-    metric: { value: "8 Wochen", label: "von 0 auf 100 Mitarbeitende" },
+    metric: { to: 8, plus: false, unit: "Wochen", label: "von 0 auf 100 Mitarbeitende" },
     text: "Zur Peak-Saison im Zentrallager haben wir gemeinsam mit dem Kunden in nur acht Wochen von 0 auf 100 Mitarbeitende skaliert — ganz ohne Zauberei, mit den richtigen Prozessen.",
     quote: "In nur 8 Wochen von 0 auf 100 — diese Erfolgsstory schreiben wir gemeinsam mit dem Kunden.",
     autor: "André Fissler · Geschäftsführer",
@@ -49,14 +50,21 @@ export default function Erfolgsgeschichten() {
           {stories.map((s) => (
             <article
               key={s.firma}
-              className="flex flex-col rounded-2xl border border-navy/10 bg-mist p-7 transition-shadow hover:shadow-lg hover:shadow-navy/5"
+              className="flex flex-col rounded-2xl border border-navy/10 bg-mist p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">{s.meta}</p>
               <h3 className="mt-2 text-xl font-bold text-navy">{s.firma}</h3>
 
               <div className="mt-5">
-                <p className="text-3xl font-bold text-navy">{s.metric.value}</p>
-                <p className="mt-0.5 text-xs text-navy/55">{s.metric.label}</p>
+                <p className="flex items-baseline gap-1.5">
+                  <Counter
+                    to={s.metric.to}
+                    suffix={s.metric.plus ? "+" : ""}
+                    className="text-5xl font-bold leading-none text-navy md:text-6xl"
+                  />
+                  <span className="text-lg font-semibold text-navy/70">{s.metric.unit}</span>
+                </p>
+                <p className="mt-2 text-xs text-navy/55">{s.metric.label}</p>
               </div>
 
               <p className="mt-4 flex-1 text-sm leading-relaxed text-navy/65">{s.text}</p>

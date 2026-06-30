@@ -1,19 +1,19 @@
 import Reveal from "./Reveal";
 
 // Kundenreferenzen laut "Benötigte Infos". Logos liegen in /public/kunden.
-// `dark`: weiße Logos (ID Logistics, Radial) brauchen eine dunkle Kachel.
+// Alle Logos werden einheitlich auf blauer Kachel als weiße Silhouette
+// dargestellt — so wirken sie als geschlossene Logo-Wand und auch dunkle Logos
+// (AKG, Jäkel) bleiben auf Blau sichtbar (Wunsch 30.06.2026).
 const kunden = [
   {
     name: "ID Logistics",
     file: "id-logistics.png",
-    dark: true,
     bereich: "E-Commerce Logistik",
     text: "Internationale Kontraktlogistik und E-Commerce-Lösungen",
   },
   {
     name: "Radial Europe",
     file: "radial.png",
-    dark: true,
     bereich: "E-Commerce Logistik",
     text: "E-Commerce Fulfillment",
   },
@@ -69,16 +69,12 @@ const kunden = [
 
 function LogoKachel({ k }) {
   return (
-    <li
-      className={`flex h-24 w-48 shrink-0 items-center justify-center rounded-2xl border px-7 ${
-        k.dark ? "border-white/10 bg-navy" : "border-navy/10 bg-white"
-      }`}
-    >
+    <li className="flex h-24 w-48 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-navy px-7">
       <img
         src={`/kunden/${k.file}`}
         alt={k.name}
         loading="lazy"
-        className="max-h-11 w-auto max-w-full object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+        className="max-h-11 w-auto max-w-full object-contain opacity-80 transition duration-300 [filter:brightness(0)_invert(1)] hover:opacity-100"
       />
     </li>
   );
@@ -119,7 +115,7 @@ export default function Referenzen() {
           {kunden.map((k) => (
             <div
               key={k.name}
-              className="rounded-2xl border border-navy/10 bg-mist p-6 transition-shadow hover:shadow-lg hover:shadow-navy/5"
+              className="rounded-2xl border border-navy/10 bg-mist p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
             >
               <span className="inline-flex rounded-full bg-cloud px-3 py-1 text-xs font-semibold uppercase tracking-wide text-navy/70">
                 {k.bereich}
