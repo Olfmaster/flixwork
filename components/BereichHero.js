@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "./Navbar";
 import Reveal from "./Reveal";
 
@@ -6,12 +7,17 @@ import Reveal from "./Reveal";
 // das eine Thema — keine Vermischung mit anderen Bereichen.
 export default function BereichHero({ b }) {
   return (
-    <section className="flx-hero-bg relative overflow-hidden text-white">
+    <section className="relative overflow-hidden bg-navy text-white">
+      <Image
+        src={b.bild}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/88 to-navy/70" />
       <Navbar />
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <span className="flx-float absolute -left-24 top-24 h-72 w-72 rounded-full bg-sky/25 blur-3xl" />
-        <span className="flx-float-rev absolute right-[-6rem] top-10 h-80 w-80 rounded-full bg-sky-soft/20 blur-3xl" />
-      </div>
 
       <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-36 md:px-8 md:pb-24 md:pt-44">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">

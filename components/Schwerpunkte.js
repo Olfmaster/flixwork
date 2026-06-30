@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 import { bereicheListe } from "@/lib/bereiche";
 
@@ -25,19 +26,30 @@ export default function Schwerpunkte() {
             <a
               key={b.slug}
               href={`/${b.slug}`}
-              className="group relative flex flex-col rounded-3xl bg-navy p-8 text-white shadow-xl shadow-navy/10 transition-all hover:-translate-y-1 hover:bg-navy-700"
+              className="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-3xl p-8 text-white shadow-xl shadow-navy/10 transition-all hover:-translate-y-1"
             >
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 text-sky-soft transition-colors group-hover:bg-sky group-hover:text-white">
-                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
-                  {b.icon}
-                </svg>
-              </span>
-              <h3 className="mt-6 text-2xl font-bold text-white">{b.name}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-white/70">{b.teaser}</p>
-              <span className="mt-8 inline-flex items-center gap-1 text-sm font-semibold text-sky-soft">
-                Mehr erfahren
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
-              </span>
+              <Image
+                src={b.bild}
+                alt={`Einsatzbereich ${b.name}`}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/25" />
+
+              <div className="relative">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white backdrop-blur transition-colors group-hover:bg-sky">
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
+                    {b.icon}
+                  </svg>
+                </span>
+                <h3 className="mt-6 text-2xl font-bold text-white">{b.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/80">{b.teaser}</p>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-sky-soft">
+                  Mehr erfahren
+                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </div>
             </a>
           ))}
         </Reveal>
