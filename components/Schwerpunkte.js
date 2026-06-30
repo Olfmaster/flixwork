@@ -38,12 +38,7 @@ export default function Schwerpunkte() {
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/25" />
 
               <div className="relative">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white backdrop-blur transition-colors group-hover:bg-sky">
-                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
-                    {b.icon}
-                  </svg>
-                </span>
-                <h3 className="mt-6 text-2xl font-bold text-white">{b.name}</h3>
+                <h3 className="text-2xl font-bold text-white">{b.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-white/80">{b.teaser}</p>
                 <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-sky-soft">
                   Mehr erfahren
