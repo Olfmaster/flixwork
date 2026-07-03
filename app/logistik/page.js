@@ -1,11 +1,16 @@
 import BereichHero from "@/components/BereichHero";
 import BereichUsps from "@/components/BereichUsps";
+import LeistungenLogistik from "@/components/LeistungenLogistik";
+import Leistungszahlen from "@/components/Leistungszahlen";
 import ExpressShuttle from "@/components/ExpressShuttle";
+import CaseStudy from "@/components/CaseStudy";
 import Referenzen from "@/components/Referenzen";
+import OnboardingProzess from "@/components/OnboardingProzess";
 import AnfrageFragebogen from "@/components/AnfrageFragebogen";
 import AbschlussCTA from "@/components/AbschlussCTA";
 import Footer from "@/components/Footer";
 import { bereiche } from "@/lib/bereiche";
+import { caseStudies } from "@/lib/case-studies";
 
 const b = bereiche.logistik;
 
@@ -22,8 +27,12 @@ export default function LogistikPage() {
       <main>
         <BereichHero b={b} />
         <BereichUsps b={b} />
+        <LeistungenLogistik />
+        <Leistungszahlen />
         <ExpressShuttle />
-        <Referenzen />
+        <CaseStudy cs={caseStudies.peakLogistik} id="case-study" />
+        <Referenzen gruppe="logistik" />
+        <OnboardingProzess />
         <AnfrageFragebogen defaultBranche="logistik" />
         <AbschlussCTA />
       </main>
