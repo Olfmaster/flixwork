@@ -39,45 +39,120 @@ export default function CaseStudy({ cs, id }) {
           )}
         </Reveal>
 
-        {/* Ausgangssituation (+ Herausforderungen, falls als Stichpunkte vorhanden) */}
-        <Reveal
-          className={`mt-12 grid gap-6 ${cs.herausforderungen?.length ? "lg:grid-cols-[1.1fr_0.9fr]" : ""}`}
-          stagger={0.1}
-        >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Ausgangssituation</p>
-            <p className="mt-3 max-w-2xl leading-relaxed text-navy/70">{cs.ausgangssituation}</p>
-          </div>
-          {cs.herausforderungen?.length > 0 && (
-            <div className="rounded-2xl border border-navy/10 bg-mist p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Herausforderungen</p>
-              <ul className="mt-4 space-y-2.5">
-                {cs.herausforderungen.map((h) => (
-                  <li key={h} className="flex gap-3 text-sm text-navy/70">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky" aria-hidden="true" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </Reveal>
+        {cs.loesung?.length > 0 ? (
+          <>
+            {/* Ausgangssituation (+ Herausforderungen, falls als Stichpunkte vorhanden) */}
+            <Reveal
+              className={`mt-12 grid gap-6 ${cs.herausforderungen?.length ? "lg:grid-cols-[1.1fr_0.9fr]" : ""}`}
+              stagger={0.1}
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Ausgangssituation</p>
+                <p className="mt-3 max-w-2xl leading-relaxed text-navy/70">{cs.ausgangssituation}</p>
+              </div>
+              {cs.herausforderungen?.length > 0 && (
+                <div className="rounded-2xl border border-navy/10 bg-mist p-7">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Herausforderungen</p>
+                  <ul className="mt-4 space-y-2.5">
+                    {cs.herausforderungen.map((h) => (
+                      <li key={h} className="flex gap-3 text-sm text-navy/70">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky" aria-hidden="true" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </Reveal>
 
-        {/* Unsere Lösung — dunkles Band */}
-        <Reveal className="mt-6 rounded-3xl flx-hero-bg p-8 text-white md:p-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-soft">Unsere Lösung</p>
-          {cs.loesungIntro && (
-            <p className="mt-3 max-w-2xl leading-relaxed text-white/75">{cs.loesungIntro}</p>
-          )}
-          {cs.loesung?.length > 0 && (
-            <div className={`mt-7 grid gap-8 ${colsClass(cs.loesung.length)}`}>
-              {cs.loesung.map((g, i) => (
-                <div key={g.titel || i}>
-                  {g.titel && <h3 className="text-lg font-bold text-white">{g.titel}</h3>}
+            {/* Unsere Lösung — dunkles Band (mit Stichpunkten) */}
+            <Reveal className="mt-6 rounded-3xl flx-hero-bg p-8 text-white md:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-soft">Unsere Lösung</p>
+              {cs.loesungIntro && (
+                <p className="mt-3 max-w-2xl leading-relaxed text-white/75">{cs.loesungIntro}</p>
+              )}
+              <div className={`mt-7 grid gap-8 ${colsClass(cs.loesung.length)}`}>
+                {cs.loesung.map((g, i) => (
+                  <div key={g.titel || i}>
+                    {g.titel && <h3 className="text-lg font-bold text-white">{g.titel}</h3>}
+                    <ul className={`space-y-3 ${g.titel ? "mt-4" : ""}`}>
+                      {g.punkte.map((p) => (
+                        <li key={p} className="flex gap-3 text-sm leading-relaxed text-white/80">
+                          <Check className="mt-0.5 h-5 w-5 shrink-0 text-sky-soft" />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              {cs.loesungFazit && (
+                <p className="mt-7 max-w-2xl border-t border-white/15 pt-6 leading-relaxed text-white/80">
+                  {cs.loesungFazit}
+                </p>
+              )}
+            </Reveal>
+          </>
+        ) : (
+          /* Prosa-Fall (keine Lösungs-Stichpunkte): Ausgangssituation & Lösung
+             nebeneinander als gleich hohe helle/dunkle Karten. */
+          <Reveal className="mt-12 grid items-stretch gap-6 lg:grid-cols-2" stagger={0.1}>
+            <div className="rounded-3xl border border-navy/10 bg-mist p-7 md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Ausgangssituation</p>
+              <p className="mt-3 leading-relaxed text-navy/70">{cs.ausgangssituation}</p>
+              {cs.herausforderungen?.length > 0 && (
+                <ul className="mt-4 space-y-2.5">
+                  {cs.herausforderungen.map((h) => (
+                    <li key={h} className="flex gap-3 text-sm text-navy/70">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky" aria-hidden="true" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="rounded-3xl flx-hero-bg p-7 text-white md:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-soft">Unsere Lösung</p>
+              {cs.loesungIntro && (
+                <p className="mt-3 leading-relaxed text-white/80">{cs.loesungIntro}</p>
+              )}
+              {cs.loesungFazit && (
+                <p className="mt-5 border-t border-white/15 pt-5 leading-relaxed text-white/80">
+                  {cs.loesungFazit}
+                </p>
+              )}
+            </div>
+          </Reveal>
+        )}
+
+        {/* Ergebnisse */}
+        <Reveal className="mt-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Ergebnisse</p>
+          {cs.ergebnisse.length === 1 && !cs.ergebnisse[0].titel ? (
+            // Einzelne, ungetitelte Ergebnisliste → Raster kleiner Karten.
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {cs.ergebnisse[0].punkte.map((p) => (
+                <div
+                  key={p}
+                  className="flex items-start gap-3 rounded-2xl border border-navy/10 bg-mist p-5 text-sm font-medium text-navy/75 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
+                >
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-sky" />
+                  {p}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={`mt-5 grid gap-6 ${colsClass(cs.ergebnisse.length)}`}>
+              {cs.ergebnisse.map((g, i) => (
+                <div
+                  key={g.titel || i}
+                  className="rounded-2xl border border-navy/10 bg-mist p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
+                >
+                  {g.titel && <h3 className="text-lg font-bold text-navy">{g.titel}</h3>}
                   <ul className={`space-y-3 ${g.titel ? "mt-4" : ""}`}>
                     {g.punkte.map((p) => (
-                      <li key={p} className="flex gap-3 text-sm leading-relaxed text-white/80">
-                        <Check className="mt-0.5 h-5 w-5 shrink-0 text-sky-soft" />
+                      <li key={p} className="flex gap-3 text-sm leading-relaxed text-navy/70">
+                        <Check className="mt-0.5 h-5 w-5 shrink-0 text-sky" />
                         {p}
                       </li>
                     ))}
@@ -86,34 +161,6 @@ export default function CaseStudy({ cs, id }) {
               ))}
             </div>
           )}
-          {cs.loesungFazit && (
-            <p className="mt-7 max-w-2xl border-t border-white/15 pt-6 leading-relaxed text-white/80">
-              {cs.loesungFazit}
-            </p>
-          )}
-        </Reveal>
-
-        {/* Ergebnisse */}
-        <Reveal className="mt-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Ergebnisse</p>
-          <div className={`mt-5 grid gap-6 ${colsClass(cs.ergebnisse.length)}`}>
-            {cs.ergebnisse.map((g, i) => (
-              <div
-                key={g.titel || i}
-                className="rounded-2xl border border-navy/10 bg-mist p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-navy/5"
-              >
-                {g.titel && <h3 className="text-lg font-bold text-navy">{g.titel}</h3>}
-                <ul className={`space-y-3 ${g.titel ? "mt-4" : ""}`}>
-                  {g.punkte.map((p) => (
-                    <li key={p} className="flex gap-3 text-sm leading-relaxed text-navy/70">
-                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-sky" />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
 
           {/* Ergebnisse auf einen Blick (optionaler Kurzüberblick) */}
           {cs.ergebnisseKurz && (
