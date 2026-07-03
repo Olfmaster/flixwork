@@ -1,6 +1,6 @@
 import BereichHero from "@/components/BereichHero";
 import FlixmonteureKennzeichen from "@/components/FlixmonteureKennzeichen";
-import CaseStudy from "@/components/CaseStudy";
+import CaseStudyTabs from "@/components/CaseStudyTabs";
 import FlixmonteureUsps from "@/components/FlixmonteureUsps";
 import Referenzen from "@/components/Referenzen";
 import MonteurKonfigurator from "@/components/MonteurKonfigurator";
@@ -24,9 +24,16 @@ export default function HandwerkPage() {
       <main>
         <BereichHero b={b} />
         <FlixmonteureKennzeichen />
-        <CaseStudy cs={caseStudies.wohnprojektShk} id="case-study" />
-        <CaseStudy cs={caseStudies.industrieRohrleitung} />
-        <CaseStudy cs={caseStudies.tgaSanierung} />
+        <CaseStudyTabs
+          id="case-study"
+          titel="Referenzprojekte aus dem Handwerk"
+          text="Echte Einsätze aus SHK, Industrie und TGA — wählen Sie einen Fall aus."
+          items={[
+            caseStudies.wohnprojektShk,
+            caseStudies.industrieRohrleitung,
+            caseStudies.tgaSanierung,
+          ]}
+        />
         <FlixmonteureUsps />
         <Referenzen gruppe="handwerk" />
         <MonteurKonfigurator />
