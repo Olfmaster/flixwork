@@ -3,7 +3,7 @@ import BereichUsps from "@/components/BereichUsps";
 import LeistungenLogistik from "@/components/LeistungenLogistik";
 import Leistungszahlen from "@/components/Leistungszahlen";
 import ExpressShuttle from "@/components/ExpressShuttle";
-import CaseStudy from "@/components/CaseStudy";
+import CaseStudyTabs from "@/components/CaseStudyTabs";
 import Referenzen from "@/components/Referenzen";
 import OnboardingProzess from "@/components/OnboardingProzess";
 import AnfrageFragebogen from "@/components/AnfrageFragebogen";
@@ -30,10 +30,11 @@ export default function LogistikPage() {
         <LeistungenLogistik />
         <Leistungszahlen />
         <ExpressShuttle />
-        <CaseStudy
-          cs={caseStudies.peakLogistik}
+        <CaseStudyTabs
           id="case-study"
-          weitere={[caseStudies.produktion, caseStudies.masterVendor]}
+          titel="Case Studies aus Logistik, Industrie und Großkunden-Projekten"
+          text="Konkrete Beispiele, wie wir Personalherausforderungen lösen — wählen Sie einen Fall aus."
+          items={[caseStudies.peakLogistik, caseStudies.produktion, caseStudies.masterVendor]}
         />
         <Referenzen gruppe="logistik" clickable={false} googleBewertungen />
         <OnboardingProzess variant="logistik" />

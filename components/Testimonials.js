@@ -1,5 +1,4 @@
 import Reveal from "./Reveal";
-import GoogleBewertungen from "./GoogleBewertungen";
 
 // Echte Kundenstimmen aus "teste.docx" (leicht gekürzt — laut Dokument
 // ausdrücklich erwünscht). Bewusst nur die Zitate aus Kundensicht; die
@@ -60,10 +59,6 @@ export default function Testimonials() {
             </figure>
           ))}
         </Reveal>
-
-        <div className="mt-10">
-          <GoogleBewertungen />
-        </div>
       </div>
     </section>
   );

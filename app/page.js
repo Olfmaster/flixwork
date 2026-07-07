@@ -24,7 +24,7 @@ export default function Home() {
         <Schwerpunkte />
         <WarumFlixwork />
         <Kennzahlen />
-        <Referenzen />
+        <Referenzen googleBewertungen />
         <Testimonials />
         <Auszeichnung />
         <Erfolgsgeschichten />
