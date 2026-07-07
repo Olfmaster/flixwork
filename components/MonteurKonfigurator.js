@@ -3,15 +3,16 @@ import { useActionState, useMemo, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendAnfrage } from "@/lib/anfrage-action";
 
-// Preislogik mit den echten Flixwork-Sätzen (Stand Datenblatt 06/2026):
-// Grundpreis 33,95 €/h, Spezialkenntnisse 40,50 €/h. Add-ons: Auswärts-Paket
-// (Übernachtung + Verpflegung 7,00 € + Firmenfahrzeug 2,50 € = 9,50 €, nur
-// zusammen buchbar), Werkzeug Basic 1,50 €, Top-10-Stadt +3,00 €.
-// An-/Abfahrt-Pauschale 295 € einmalig, Mindestabnahme 2 Monteure. Staffelung
-// bei längeren Einsätzen erfolgt individuell ("auf Anfrage").
+// Preislogik mit den echten Flixwork-Sätzen (aktualisierte Kalkulation von
+// Andre, 07/2026): Grundpreis 37,00 €/h, Spezialkenntnisse 41,00 €/h.
+// Mindestlaufzeit 1 Monat, Laufzeitrabatt ab 6 Monaten -1 %, ab 12 Monaten -3 %.
+// Add-ons: Montage-Paket (An-/Abreise, Unterkunft, Verpflegungspauschale &
+// Firmenwagen, nur zusammen buchbar) 10,00 €, Werkzeug Basic 2,00 €,
+// Übernachtungszuschlag in Top-Städten (München, Hamburg, Frankfurt, Köln,
+// Düsseldorf) +2,00 €. Mindestabnahme 2 Monteure.
 const TARIFE = [
-  { id: "standard", label: "Standard-Monteur", basis: 33.95 },
-  { id: "spezial", label: "Mit Spezialkenntnissen", basis: 40.5 },
+  { id: "standard", label: "Standard-Monteur", basis: 37 },
+  { id: "spezial", label: "Mit Spezialkenntnissen", basis: 41 },
 ];
 const FACHGEBIETE = [
   { id: "elektro", label: "Elektro" },
@@ -19,17 +20,15 @@ const FACHGEBIETE = [
   { id: "versorgung", label: "Versorgungstechnik" },
 ];
 const DAUER = [
-  { id: "tag", label: "1 Tag" },
-  { id: "mehrtaegig", label: "Mehrere Tage" },
-  { id: "wochen", label: "Wochen" },
-  { id: "monate", label: "Monate" },
+  { id: "1monat", label: "1 Monat", rabatt: 0 },
+  { id: "6monate", label: "6 Monate", rabatt: 0.01 },
+  { id: "12monate", label: "12 Monate", rabatt: 0.03 },
 ];
 const OPTIONEN = [
-  { id: "auswaerts", label: "Übernachtung, Verpflegung & Firmenfahrzeug", auf: 9.5 },
-  { id: "werkzeug", label: "Werkzeug (Basic)", auf: 1.5 },
-  { id: "top10", label: "Einsatz in Top-10-Stadt", auf: 3 },
+  { id: "montagepaket", label: "Montage-Paket", auf: 10 },
+  { id: "werkzeug", label: "Werkzeug (Basic)", auf: 2 },
+  { id: "topstaedte", label: "Übernachtungszuschlag Top-Städte", auf: 2 },
 ];
-const ANFAHRT = 295; // An-/Abfahrt-Pauschale, einmalig
 const MIN_MONTEURE = 2;
 
 const eur = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
@@ -51,9 +50,9 @@ function SubmitButton() {
 export default function MonteurKonfigurator() {
   const [tarif, setTarif] = useState("standard");
   const [fach, setFach] = useState("elektro");
-  const [dauer, setDauer] = useState("mehrtaegig");
+  const [dauer, setDauer] = useState("1monat");
   const [anzahl, setAnzahl] = useState(MIN_MONTEURE);
-  const [opts, setOpts] = useState({ auswaerts: true, werkzeug: true, top10: false });
+  const [opts, setOpts] = useState({ montagepaket: true, werkzeug: true, topstaedte: false });
   const [state, formAction] = useActionState(sendAnfrage, initial);
 
   const toggle = (id) => setOpts((o) => ({ ...o, [id]: !o[id] }));
@@ -63,18 +62,17 @@ export default function MonteurKonfigurator() {
     const f = FACHGEBIETE.find((x) => x.id === fach);
     const d = DAUER.find((x) => x.id === dauer);
     const optAuf = OPTIONEN.filter((o) => opts[o.id]).reduce((s, o) => s + o.auf, 0);
-    const r = t.basis + optAuf;
+    const r = (t.basis + optAuf) * (1 - d.rabatt);
     const tag = r * 8 * anzahl;
     const gewaehlteOpts = OPTIONEN.filter((o) => opts[o.id]).map((o) => o.label);
     const det = [
       `Tarif: ${t.label} (${eur.format(t.basis)}/Std.)`,
       `Fachgebiet: ${f.label}`,
-      `Einsatzdauer: ${d.label}`,
+      `Einsatzdauer: ${d.label}${d.rabatt ? ` (${(d.rabatt * 100).toFixed(0)} % Laufzeitrabatt)` : ""}`,
       `Anzahl Monteure: ${anzahl}`,
       `Zusatzoptionen: ${gewaehlteOpts.length ? gewaehlteOpts.join(", ") : "keine"}`,
       `Geschätzter Stundensatz: ${eur.format(r)} (unverbindlich, zzgl. MwSt.)`,
       `Geschätzter Tagessatz (8 Std. × ${anzahl}): ${eur.format(tag)}`,
-      `An-/Abfahrt-Pauschale: ${eur.format(ANFAHRT)} (einmalig)`,
     ].join("\n");
     return { rate: r, tagessatz: tag, details: det };
   }, [tarif, fach, dauer, anzahl, opts]);
@@ -121,10 +119,11 @@ export default function MonteurKonfigurator() {
                 {DAUER.map((d) => (
                   <Chip key={d.id} active={dauer === d.id} onClick={() => setDauer(d.id)}>
                     {d.label}
+                    {d.rabatt > 0 ? ` · -${(d.rabatt * 100).toFixed(0)} %` : ""}
                   </Chip>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-navy/45">Staffelpreise bei längeren Einsätzen auf Anfrage.</p>
+              <p className="mt-3 text-xs text-navy/45">Mindestlaufzeit 1 Monat.</p>
             </Block>
 
             <Block label="4 · Anzahl Monteure">
@@ -146,7 +145,8 @@ export default function MonteurKonfigurator() {
                 ))}
               </div>
               <p className="mt-3 text-xs text-navy/45">
-                Übernachtung, Verpflegung &amp; Firmenfahrzeug sind nur als Paket buchbar.
+                Montage-Paket = An-/Abreise, Unterkunft, Verpflegungspauschale &amp; Firmenwagen (nur zusammen buchbar).
+                Übernachtungszuschlag gilt für München, Hamburg, Frankfurt, Köln und Düsseldorf.
               </p>
             </Block>
           </div>
@@ -161,11 +161,8 @@ export default function MonteurKonfigurator() {
             <p className="mt-2 text-sm text-white/70">
               ≈ {eur.format(tagessatz)} pro Tag <span className="text-white/40">(8 Std. × {anzahl})</span>
             </p>
-            <p className="mt-1 text-sm text-white/70">
-              + {eur.format(ANFAHRT)} An-/Abfahrt <span className="text-white/40">(einmalig)</span>
-            </p>
             <p className="mt-2 text-xs text-white/40">
-              *Unverbindliche Schätzung, zzgl. MwSt. Mindestabnahme {MIN_MONTEURE} Monteure. Das finale Angebot stellen wir individuell.
+              *Unverbindliche Schätzung, zzgl. MwSt. Mindestlaufzeit 1 Monat, Mindestabnahme {MIN_MONTEURE} Monteure. Das finale Angebot stellen wir individuell.
             </p>
 
             <form action={formAction} className="mt-6 space-y-3">
