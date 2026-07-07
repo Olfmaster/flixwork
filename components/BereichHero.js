@@ -17,7 +17,7 @@ export default function BereichHero({ b }) {
         className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/88 to-navy/70" />
-      <Navbar zusatzLogo={b.navbarZusatzLogo} />
+      <Navbar logoOverride={b.navbarLogo} />
 
       <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-36 md:px-8 md:pb-24 md:pt-44">
         <div className={b.panel ? "grid items-center gap-12 lg:grid-cols-2 lg:gap-16" : ""}>
