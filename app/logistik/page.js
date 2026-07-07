@@ -1,7 +1,7 @@
 import BereichHero from "@/components/BereichHero";
+import KennzahlenKarte from "@/components/KennzahlenKarte";
 import BereichUsps from "@/components/BereichUsps";
 import LeistungenLogistik from "@/components/LeistungenLogistik";
-import Leistungszahlen from "@/components/Leistungszahlen";
 import ExpressShuttle from "@/components/ExpressShuttle";
 import CaseStudyTabs from "@/components/CaseStudyTabs";
 import Referenzen from "@/components/Referenzen";
@@ -11,6 +11,7 @@ import AbschlussCTA from "@/components/AbschlussCTA";
 import Footer from "@/components/Footer";
 import { bereiche } from "@/lib/bereiche";
 import { caseStudies } from "@/lib/case-studies";
+import { leistungszahlen } from "@/lib/leistungszahlen";
 
 const b = bereiche.logistik;
 
@@ -26,9 +27,11 @@ export default function LogistikPage() {
     <>
       <main>
         <BereichHero b={b} />
+        <div className="relative z-10 mx-auto -mt-16 max-w-5xl px-5 md:-mt-20 md:px-8">
+          <KennzahlenKarte zahlen={leistungszahlen} className="shadow-2xl shadow-navy/15" />
+        </div>
         <BereichUsps b={b} />
         <LeistungenLogistik />
-        <Leistungszahlen />
         <ExpressShuttle />
         <CaseStudyTabs
           id="case-study"
