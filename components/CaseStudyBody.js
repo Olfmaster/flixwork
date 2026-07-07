@@ -126,7 +126,8 @@ export default function CaseStudyBody({ cs, showKopf = true }) {
         </Reveal>
       )}
 
-      {/* Ergebnisse */}
+      {/* Ergebnisse (optional — nicht jede Case Study braucht sie) */}
+      {cs.ergebnisse?.length > 0 && (
       <Reveal className="mt-10">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky">Ergebnisse</p>
         {cs.ergebnisse.length === 1 && !cs.ergebnisse[0].titel ? (
@@ -175,6 +176,7 @@ export default function CaseStudyBody({ cs, showKopf = true }) {
           </div>
         )}
       </Reveal>
+      )}
 
       {/* Kundenmehrwert */}
       {cs.kundenmehrwert && (

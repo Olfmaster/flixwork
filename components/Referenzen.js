@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import GoogleBewertungen from "./GoogleBewertungen";
 
 // Kundenreferenzen. Logos liegen in /public/kunden und werden einheitlich auf
 // blauer Kachel als weiße Silhouette dargestellt (Wunsch 30.06.2026). Fehlt ein
@@ -46,7 +47,7 @@ const kopf = {
   },
 };
 
-function LogoKachel({ k }) {
+function LogoKachel({ k, clickable }) {
   // Im Laufband: dekorative Endlosschleife (aria-hidden), daher tabIndex -1 —
   // die barrierefreien Links sind die Referenz-Karten unten.
   const inner = k.file ? (
@@ -63,7 +64,7 @@ function LogoKachel({ k }) {
     "flex h-24 w-48 items-center justify-center rounded-2xl border border-white/10 bg-navy px-7 transition-transform hover:scale-[1.04]";
   return (
     <li className="shrink-0">
-      {k.url ? (
+      {clickable && k.url ? (
         <a href={k.url} target="_blank" rel="noopener" tabIndex={-1} aria-label={k.name} className={cls}>
           {inner}
         </a>
@@ -74,33 +75,11 @@ function LogoKachel({ k }) {
   );
 }
 
-function ReferenzKarte({ k }) {
-  const inner = (
-    <>
-      <span className="inline-flex rounded-full bg-cloud px-3 py-1 text-xs font-semibold uppercase tracking-wide text-navy/70">
-        {k.bereich}
-      </span>
-      <h3 className="mt-3 flex items-center gap-1.5 text-lg font-bold text-navy">
-        {k.name}
-        {k.url && (
-          <span aria-hidden="true" className="text-sky opacity-0 transition-opacity group-hover:opacity-100">↗</span>
-        )}
-      </h3>
-      <p className="mt-1.5 text-sm leading-relaxed text-navy/65">{k.text}</p>
-    </>
-  );
-  const cls =
-    "group block rounded-2xl border border-navy/10 bg-mist p-6 transition-all duration-300 hover:-translate-y-1 hover:border-sky/40 hover:shadow-lg hover:shadow-navy/5";
-  return k.url ? (
-    <a href={k.url} target="_blank" rel="noopener" className={cls}>
-      {inner}
-    </a>
-  ) : (
-    <div className={cls}>{inner}</div>
-  );
-}
-
-export default function Referenzen({ gruppe }) {
+// `clickable` (Website-Review 03.07.2026): Logistik & Industrie verlinken die
+// Referenz-Logos bewusst nicht mehr nach außen (Google-Bewertungen übernehmen
+// dort die Vertrauensfunktion). `googleBewertungen` blendet genau diese direkt
+// unter dem Logo-Band ein — einheitlich auf allen Unterseiten.
+export default function Referenzen({ gruppe, clickable = true, googleBewertungen = false }) {
   const liste = gruppe ? kunden.filter((k) => k.gruppe === gruppe) : kunden;
   const k = kopf[gruppe] || kopf.all;
 
@@ -123,19 +102,16 @@ export default function Referenzen({ gruppe }) {
       >
         <ul className="flx-marquee flex w-max flex-nowrap items-center gap-5 pl-5 hover:[animation-play-state:paused]">
           {[...liste, ...liste].map((kunde, i) => (
-            <LogoKachel k={kunde} key={i} />
+            <LogoKachel k={kunde} clickable={clickable} key={i} />
           ))}
         </ul>
       </div>
 
-      {/* Referenz-Karten mit Kontext */}
-      <div className="mx-auto mt-14 max-w-7xl px-5 md:px-8">
-        <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.08}>
-          {liste.map((kunde) => (
-            <ReferenzKarte k={kunde} key={kunde.name} />
-          ))}
-        </Reveal>
-      </div>
+      {googleBewertungen && (
+        <div className="mx-auto mt-14 max-w-7xl px-5 md:px-8">
+          <GoogleBewertungen />
+        </div>
+      )}
     </section>
   );
 }

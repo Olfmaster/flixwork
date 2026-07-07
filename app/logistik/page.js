@@ -30,9 +30,13 @@ export default function LogistikPage() {
         <LeistungenLogistik />
         <Leistungszahlen />
         <ExpressShuttle />
-        <CaseStudy cs={caseStudies.peakLogistik} id="case-study" />
-        <Referenzen gruppe="logistik" />
-        <OnboardingProzess />
+        <CaseStudy
+          cs={caseStudies.peakLogistik}
+          id="case-study"
+          weitere={[caseStudies.produktion, caseStudies.masterVendor]}
+        />
+        <Referenzen gruppe="logistik" clickable={false} googleBewertungen />
+        <OnboardingProzess variant="logistik" />
         <AnfrageFragebogen defaultBranche="logistik" />
         <AbschlussCTA />
       </main>

@@ -234,7 +234,7 @@ function Field({ ...rest }) {
   return (
     <input
       {...rest}
-      className="w-full rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-sky focus:outline-none"
+      className="w-full rounded-lg border border-transparent bg-white px-4 py-3 text-sm text-navy placeholder-navy/40 focus:border-sky focus:outline-none"
     />
   );
 }

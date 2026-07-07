@@ -49,14 +49,6 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-36 md:px-8 md:pb-28 md:pt-44">
-        <p
-          data-h
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-white/80 backdrop-blur"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-sky-soft" />
-          Inhabergeführt · bundesweit · B2B-Personaldienstleister
-        </p>
-
         <h1 data-h className="max-w-5xl text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
           Qualifiziertes Personal für{" "}
           <span className="text-sky-soft">Ihr Unternehmen</span>

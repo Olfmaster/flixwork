@@ -25,10 +25,10 @@ export default function IndustriePage() {
       <main>
         <BereichHero b={b} />
         <BereichUsps b={b} />
-        <IndustrieProzess />
         <CaseStudy cs={caseStudies.produktion} id="case-study" />
-        <Referenzen gruppe="industrie" />
-        <OnboardingProzess />
+        <IndustrieProzess />
+        <Referenzen gruppe="industrie" clickable={false} googleBewertungen />
+        <OnboardingProzess variant="industrie" />
         <AnfrageFragebogen defaultBranche="produktion" />
         <AbschlussCTA />
       </main>

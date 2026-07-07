@@ -17,11 +17,11 @@ export default function BereichHero({ b }) {
         className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/88 to-navy/70" />
-      <Navbar />
+      <Navbar zusatzLogo={b.navbarZusatzLogo} />
 
       <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-36 md:px-8 md:pb-24 md:pt-44">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
+        <div className={b.panel ? "grid items-center gap-12 lg:grid-cols-2 lg:gap-16" : ""}>
+          <Reveal className={b.panel ? undefined : "max-w-3xl"}>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-soft">{b.eyebrow}</p>
             <h1 className="mt-3 text-4xl font-bold leading-[1.08] tracking-tight md:text-5xl">{b.titel}</h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/80">{b.text}</p>
@@ -42,19 +42,35 @@ export default function BereichHero({ b }) {
             </div>
           </Reveal>
 
-          <Reveal y={36} className="rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur md:p-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">{b.panelTitel}</p>
-            <ul className="mt-5 space-y-3">
-              {b.panel.map((p) => (
-                <li key={p} className="flex items-center gap-3 border-b border-white/10 pb-3 text-lg font-medium last:border-0 last:pb-0">
-                  <span className="h-1.5 w-1.5 rounded-full bg-sky-soft" />
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          {b.panel && (
+            <Reveal y={36} className="rounded-3xl border border-white/15 bg-white/5 p-8 backdrop-blur md:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">{b.panelTitel}</p>
+              <ul className="mt-5 space-y-3">
+                {b.panel.map((p) => (
+                  <li key={p} className="flex items-center gap-3 border-b border-white/10 pb-3 text-lg font-medium last:border-0 last:pb-0">
+                    <span className="h-1.5 w-1.5 rounded-full bg-sky-soft" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          )}
         </div>
       </div>
+
+      {/* Schlagwort-Laufband — KPIs (Logistik) oder Branchen-Spezialisierungen
+          (Industrie) direkt im Hero (Website-Review 03.07.2026) */}
+      {b.band && (
+        <div className="relative border-t border-white/10 bg-navy-deep/40 py-4">
+          <div className="flex w-max flex-nowrap gap-10 pl-10 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] flx-marquee">
+            {[...b.band, ...b.band].map((eintrag, i) => (
+              <span key={i} className="whitespace-nowrap text-sm font-semibold uppercase tracking-wider text-white/80">
+                {eintrag} <span className="text-sky-soft/60">/</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

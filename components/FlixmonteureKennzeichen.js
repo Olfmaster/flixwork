@@ -1,12 +1,12 @@
 import Reveal from "./Reveal";
 
-// 4 Kennzahlen/Fakten direkt unter dem Hero (Kundenmail Handwerk). Kompakter
-// Trust-Streifen — überwiegend qualitativ, daher als Badge-Reihe (kein Counter).
+// Kennzahlen direkt unter dem Hero (Website-Review 03.07.2026): 15 Jahre
+// Erfahrung, Verfügbarkeit in 4 Tagen, Komplettausstattung Auto/Werkzeug/
+// Unterkunft. Kompakter Trust-Streifen.
 const fakten = [
-  ["10+", "Jahre Erfahrung"],
-  ["DE", "Bundesweite Einsätze"],
-  ["SHK · Elektro · TGA", "Spezialisiert"],
-  ["Tage", "Schnelle Verfügbarkeit"],
+  ["15+", "Jahre Erfahrung"],
+  ["4 Tage", "Verfügbar ab Anfrage"],
+  ["Auto · Werkzeug · Unterkunft", "Komplett ausgestattet"],
 ];
 
 export default function FlixmonteureKennzeichen() {
@@ -14,7 +14,7 @@ export default function FlixmonteureKennzeichen() {
     <section className="bg-white py-10 md:py-12">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <Reveal
-          className="grid gap-y-8 rounded-3xl border border-navy/10 bg-mist px-6 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-navy/10"
+          className="grid gap-y-8 rounded-3xl border border-navy/10 bg-mist px-6 py-8 sm:grid-cols-3 sm:divide-x sm:divide-navy/10"
           stagger={0.1}
         >
           {fakten.map(([wert, label]) => (

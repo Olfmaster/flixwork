@@ -25,8 +25,8 @@ export default function Home() {
         <WarumFlixwork />
         <Kennzahlen />
         <Referenzen />
-        <Auszeichnung />
         <Testimonials />
+        <Auszeichnung />
         <Erfolgsgeschichten />
         <CaseStudy cs={caseStudies.masterVendor} id="master-vendor" />
         <WarumFlixworkGrosskunden />

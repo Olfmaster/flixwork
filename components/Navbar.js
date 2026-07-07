@@ -32,7 +32,10 @@ const socials = [
   },
 ];
 
-export default function Navbar() {
+// `zusatzLogo` (Website-Review 03.07.2026): zeigt das Flixmonteure-Logo neben
+// dem Flixwork-Logo auf der Handwerk-Seite vor — finale Platzierung im Header
+// hängt von der Abstimmung mit dem bestehenden Webdesigner von Flixwork ab.
+export default function Navbar({ zusatzLogo }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -54,7 +57,7 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
-        <a href="/" className="flex items-center" aria-label="Flixwork Startseite">
+        <a href="/" className="flex items-center gap-3" aria-label="Flixwork Startseite">
           <Image
             src={logo}
             alt="Flixwork"
@@ -63,6 +66,16 @@ export default function Navbar() {
               solid ? "" : "[filter:brightness(0)_invert(1)]"
             }`}
           />
+          {zusatzLogo && (
+            <>
+              <span className={`h-7 w-px ${solid ? "bg-navy/15" : "bg-white/25"}`} aria-hidden="true" />
+              <img
+                src={zusatzLogo.src}
+                alt={zusatzLogo.alt}
+                className={`h-7 w-auto md:h-9 transition ${solid ? "" : "[filter:brightness(0)_invert(1)]"}`}
+              />
+            </>
+          )}
         </a>
 
         {/* Desktop */}

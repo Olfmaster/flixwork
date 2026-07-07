@@ -22,8 +22,11 @@ export default function HandwerkPage() {
   return (
     <>
       <main>
+        {/* Reihenfolge Fachgebiete (im Hero) → KPIs → Referenzen → Case Studies →
+            Warum Fix Monteure → Konfigurator (Website-Review 03.07.2026) */}
         <BereichHero b={b} />
         <FlixmonteureKennzeichen />
+        <Referenzen gruppe="handwerk" googleBewertungen />
         <CaseStudyTabs
           id="case-study"
           titel="Referenzprojekte aus dem Handwerk"
@@ -35,7 +38,6 @@ export default function HandwerkPage() {
           ]}
         />
         <FlixmonteureUsps />
-        <Referenzen gruppe="handwerk" />
         <MonteurKonfigurator />
         <AbschlussCTA
           kontaktHref="#konfigurator"
