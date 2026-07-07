@@ -9,7 +9,8 @@ import { sendAnfrage } from "@/lib/anfrage-action";
 // Add-ons: Montage-Paket (An-/Abreise, Unterkunft, Verpflegungspauschale &
 // Firmenwagen, nur zusammen buchbar) 10,00 €, Werkzeug Basic 2,00 €,
 // Übernachtungszuschlag in Top-Städten (München, Hamburg, Frankfurt, Köln,
-// Düsseldorf) +2,00 €. Mindestabnahme 2 Monteure.
+// Düsseldorf) +2,00 €. Zusätzlich An-/Abfahrt-Pauschale 295 € einmalig.
+// Mindestabnahme 2 Monteure.
 const TARIFE = [
   { id: "standard", label: "Standard-Monteur", basis: 37 },
   { id: "spezial", label: "Mit Spezialkenntnissen", basis: 41 },
@@ -29,6 +30,7 @@ const OPTIONEN = [
   { id: "werkzeug", label: "Werkzeug (Basic)", auf: 2 },
   { id: "topstaedte", label: "Übernachtungszuschlag Top-Städte", auf: 2 },
 ];
+const ANFAHRT = 295; // An-/Abfahrt-Pauschale, einmalig, zusätzlich zum Montage-Paket
 const MIN_MONTEURE = 2;
 
 const eur = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
@@ -73,6 +75,7 @@ export default function MonteurKonfigurator() {
       `Zusatzoptionen: ${gewaehlteOpts.length ? gewaehlteOpts.join(", ") : "keine"}`,
       `Geschätzter Stundensatz: ${eur.format(r)} (unverbindlich, zzgl. MwSt.)`,
       `Geschätzter Tagessatz (8 Std. × ${anzahl}): ${eur.format(tag)}`,
+      `An-/Abfahrt-Pauschale: ${eur.format(ANFAHRT)} (einmalig)`,
     ].join("\n");
     return { rate: r, tagessatz: tag, details: det };
   }, [tarif, fach, dauer, anzahl, opts]);
@@ -160,6 +163,9 @@ export default function MonteurKonfigurator() {
             </div>
             <p className="mt-2 text-sm text-white/70">
               ≈ {eur.format(tagessatz)} pro Tag <span className="text-white/40">(8 Std. × {anzahl})</span>
+            </p>
+            <p className="mt-1 text-sm text-white/70">
+              + {eur.format(ANFAHRT)} An-/Abfahrt <span className="text-white/40">(einmalig)</span>
             </p>
             <p className="mt-2 text-xs text-white/40">
               *Unverbindliche Schätzung, zzgl. MwSt. Mindestlaufzeit 1 Monat, Mindestabnahme {MIN_MONTEURE} Monteure. Das finale Angebot stellen wir individuell.
