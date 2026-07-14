@@ -43,7 +43,7 @@ const kopf = {
   },
   handwerk: {
     titel: "Betriebe, die auf Flixmonteure zählen",
-    text: "Von SHK über Wärme- und Kältetechnik bis zur technischen Gebäudeausrüstung — wir unterstützen Fachbetriebe und Generalunternehmer im Handwerk.",
+    text: "Von SHK über Wärme- und Kältetechnik bis zur technischen Gebäudeausrüstung — wir unterstützen Fachbetriebe im Handwerk.",
   },
 };
 

@@ -1,34 +1,30 @@
 import Reveal from "./Reveal";
 
 // Onboarding-/Ablaufprozess (Kundenmail 03.07.2026, Website-Review 03.07.2026).
-// Logistik: 10-Tage-Neukundenprozess (Bestandskunden haben 24–48h Reaktionszeit).
-// Industrie: 5-Tage-Prozess, gilt allgemein — nicht nur für Neukunden.
+// Einheitlich 5 Tage in allen Bereichen (Kundenwunsch 14.07.2026 — vorher
+// 10 Tage in der Logistik). Unterschied nur in der Ansprache: Logistik betont
+// den Neukundenprozess (Bestandskunden: 24–48 h Reaktionszeit), Industrie gilt
+// allgemein.
+const phasen = [
+  ["01", "Tag 1", "Anfrage & Bedarfsanalyse", "Wir erfassen Anforderungen, Qualifikationsprofil und Rahmenbedingungen."],
+  ["02", "Tag 2", "Recruiting & Kandidatenauswahl", "Wir sichten unseren Pool, sprechen Kandidaten an und wählen passende Profile aus."],
+  ["03", "Tag 3", "Vorstellung & Vertragsprozess", "Sie lernen die Kandidaten kennen; wir klären den Vertrags- und Überlassungsprozess."],
+  ["04", "Tag 4–5", "Onboarding & Einsatzstart", "Organisation, Einweisung und Start am Einsatzort — einsatzbereit vom ersten Tag."],
+  ["05", "Ab Tag 5", "KPI-Reporting & laufende Betreuung", "Regelmäßiges KPI-Reporting und feste Ansprechpartner während des gesamten Einsatzes."],
+];
+
 const varianten = {
   logistik: {
     eyebrow: "Neukundenprozess",
-    titel: "In rund zehn Tagen einsatzbereit",
+    titel: "In rund fünf Tagen einsatzbereit",
     intro:
       "Für Neukunden: von der ersten Anfrage bis zum laufenden KPI-Reporting — ein klarer, planbarer Ablauf mit festen Ansprechpartnern. Bestandskunden profitieren bei neuem Bedarf von einer Reaktionszeit von 24–48 Stunden.",
-    phasen: [
-      ["01", "Tag 1", "Anfrage & Bedarfsanalyse", "Wir erfassen Anforderungen, Qualifikationsprofil und Rahmenbedingungen."],
-      ["02", "Tag 2–3", "Recruiting & Kandidatenauswahl", "Wir sichten unseren Pool, sprechen Kandidaten an und wählen passende Profile aus."],
-      ["03", "Tag 4–5", "Vorstellung & Vertragsprozess", "Sie lernen die Kandidaten kennen; wir klären den Vertrags- und Überlassungsprozess."],
-      ["04", "Tag 5–10", "Onboarding & Einsatzstart", "Organisation, Einweisung und Start am Einsatzort — einsatzbereit vom ersten Tag."],
-      ["05", "Ab Tag 10", "KPI-Reporting & laufende Betreuung", "Regelmäßiges KPI-Reporting und feste Ansprechpartner während des gesamten Einsatzes."],
-    ],
   },
   industrie: {
     eyebrow: "Unser Prozess",
     titel: "In rund fünf Tagen einsatzbereit",
     intro:
       "Von der ersten Anfrage bis zum laufenden KPI-Reporting — ein klarer, planbarer Ablauf mit festen Ansprechpartnern, für Neu- wie Bestandskunden.",
-    phasen: [
-      ["01", "Tag 1", "Anfrage & Bedarfsanalyse", "Wir erfassen Anforderungen, Qualifikationsprofil und Rahmenbedingungen."],
-      ["02", "Tag 2", "Recruiting & Kandidatenauswahl", "Wir sichten unseren Pool, sprechen Kandidaten an und wählen passende Profile aus."],
-      ["03", "Tag 3", "Vorstellung & Vertragsprozess", "Sie lernen die Kandidaten kennen; wir klären den Vertrags- und Überlassungsprozess."],
-      ["04", "Tag 4–5", "Onboarding & Einsatzstart", "Organisation, Einweisung und Start am Einsatzort — einsatzbereit vom ersten Tag."],
-      ["05", "Ab Tag 5", "KPI-Reporting & laufende Betreuung", "Regelmäßiges KPI-Reporting und feste Ansprechpartner während des gesamten Einsatzes."],
-    ],
   },
 };
 
@@ -46,7 +42,7 @@ export default function OnboardingProzess({ variant = "logistik" }) {
         </Reveal>
 
         <Reveal className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5" stagger={0.1}>
-          {v.phasen.map(([n, tag, titel, desc]) => (
+          {phasen.map(([n, tag, titel, desc]) => (
             <div key={n} className="rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur">
               <div className="flex items-center justify-between">
                 <span className="text-3xl font-bold text-sky-soft">{n}</span>

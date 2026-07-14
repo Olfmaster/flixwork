@@ -25,11 +25,13 @@ export default function IndustriePage() {
       <main>
         <BereichHero b={b} />
         <BereichUsps b={b} />
-        <CaseStudy cs={caseStudies.produktion} id="case-study" />
         <IndustrieProzess />
         <Referenzen gruppe="industrie" clickable={false} googleBewertungen />
         <OnboardingProzess variant="industrie" />
         <AnfrageFragebogen defaultBranche="produktion" />
+        {/* Case Study bewusst als letzter Inhaltsblock vor dem CTA
+            (Kundenwunsch 14.07.2026: "nach ganz unten"). */}
+        <CaseStudy cs={caseStudies.produktion} id="case-study" />
         <AbschlussCTA />
       </main>
       <Footer />
