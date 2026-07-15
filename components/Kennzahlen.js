@@ -7,7 +7,7 @@ import Counter from "./Counter";
 const zahlen = [
   { to: 3, suffix: "", label: "Geschäftsbereiche", sub: "Logistik · Industrie · Handwerk" },
   { to: 15, suffix: "+", label: "Jahre Partnerschaft", sub: "längste laufende Kundenbeziehung" },
-  { to: 100, suffix: "", label: "Onboarding-Mitarbeiter", sub: "in nur 8 Wochen ongeboardet" },
+  { to: 24, suffix: " h", label: "Reaktionszeit", sub: "auf Personalanfragen" },
 ];
 
 export default function Kennzahlen() {
