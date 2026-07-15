@@ -66,7 +66,7 @@ export default function WarumFlixwork() {
           <h3 className="text-lg font-bold text-navy">Der direkte Vergleich</h3>
           <div className="mt-5 overflow-hidden rounded-3xl border border-navy/10 bg-white">
             <div className="hidden border-b border-navy/10 bg-cloud/60 px-6 py-4 md:grid md:grid-cols-[1.1fr_1fr_1fr] md:gap-6">
-              <span className="sr-only">Kriterium</span>
+              <span aria-hidden="true" />
               <span className="text-sm font-bold text-navy">Flixwork Gruppe</span>
               <span className="text-sm font-semibold text-navy/45">Typischer Konzernanbieter</span>
             </div>
