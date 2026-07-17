@@ -22,11 +22,11 @@ export default function Home() {
       <main>
         <Hero />
         <Schwerpunkte />
-        <WarumFlixwork />
         <Kennzahlen />
         <Referenzen googleBewertungen />
         <Testimonials />
         <Auszeichnung />
+        <WarumFlixwork />
         <Erfolgsgeschichten />
         <CaseStudy cs={caseStudies.masterVendor} id="master-vendor" />
         <WarumFlixworkGrosskunden />

@@ -3,8 +3,8 @@ import Reveal from "./Reveal";
 // Kernbotschaft: inhabergeführt = schnelle Entscheidungen. Der direkte Vergleich
 // mit dem Konzernanbieter macht den Vorteil messbar statt behauptet.
 const vergleich = [
-  ["Vertragsunterzeichnung", "Innerhalb von 24 Stunden", "Bis zu 4 Wochen"],
-  ["Rahmenverträge", "5 Werktage", "Bis zu 6 Wochen"],
+  ["Vertragsunterzeichnung", "Innerhalb von 1 Tag", "Bis zu 28 Tage"],
+  ["Rahmenverträge", "5 Werktage", "Bis zu 42 Tage"],
   ["Entscheidungen", "Innerhalb von 48 Stunden", "Durchschnittlich 8 Werktage"],
   ["Ansprechpartner", "Direkte Entscheider", "Mehrere Hierarchieebenen"],
   ["Sonderlösungen", "Schnell umsetzbar", "Oft langwierige Freigaben"],
@@ -56,7 +56,7 @@ export default function WarumFlixwork() {
             Zentralen abgestimmt. Wertvolle Zeit geht verloren.
           </p>
           <p className="mt-4 leading-relaxed text-navy/65">
-            Die Flixwork Gruppe ist inhabergeführt. Deshalb können wir schnell,
+            Flixwork ist inhabergeführt. Deshalb können wir schnell,
             flexibel und kundenorientiert handeln — ohne lange Freigabeschleifen
             und ohne Konzernbürokratie.
           </p>
@@ -67,8 +67,8 @@ export default function WarumFlixwork() {
           <div className="mt-5 overflow-hidden rounded-3xl border border-navy/10 bg-white">
             <div className="hidden border-b border-navy/10 bg-cloud/60 px-6 py-4 md:grid md:grid-cols-[1.1fr_1fr_1fr] md:gap-6">
               <span aria-hidden="true" />
-              <span className="text-sm font-bold text-navy">Flixwork Gruppe</span>
-              <span className="text-sm font-semibold text-navy/45">Typischer Konzernanbieter</span>
+              <span className="text-sm font-bold text-navy">Flixwork</span>
+              <span className="text-sm font-semibold text-navy/45">Investoren-/Konzerngesellschaft</span>
             </div>
 
             {vergleich.map(([kriterium, flix, konzern]) => (
@@ -91,7 +91,7 @@ export default function WarumFlixwork() {
                   />
                   <span className="text-sm text-navy/50">
                     {konzern}
-                    <span className="ml-1 md:hidden">· Konzernanbieter</span>
+                    <span className="ml-1 md:hidden">· Konzerngesellschaft</span>
                   </span>
                 </p>
               </div>
@@ -108,10 +108,10 @@ export default function WarumFlixwork() {
               Wenn Produktionslinien laufen, Aufträge abgearbeitet werden müssen
               oder saisonale Peaks bevorstehen, zählen keine Konzernstrukturen —
               sondern Ergebnisse. Deshalb vertrauen Kunden aus Logistik,
-              Industrie und Handwerk auf die Flixwork Gruppe.
+              Industrie und Handwerk auf Flixwork.
             </p>
             <p className="mt-4 leading-relaxed text-navy/65">
-              Als inhabergeführte Unternehmensgruppe kombinieren wir die
+              Als inhabergeführtes Unternehmen kombinieren wir die
               Flexibilität eines mittelständischen Unternehmens mit den
               Strukturen eines professionellen Personaldienstleisters:
               <span className="font-semibold text-navy">
