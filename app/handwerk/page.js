@@ -1,8 +1,10 @@
 import BereichHero from "@/components/BereichHero";
+import LogoBand from "@/components/LogoBand";
+import AllInclusive from "@/components/AllInclusive";
 import FlixmonteureKennzeichen from "@/components/FlixmonteureKennzeichen";
 import CaseStudyTabs from "@/components/CaseStudyTabs";
 import FlixmonteureUsps from "@/components/FlixmonteureUsps";
-import Referenzen from "@/components/Referenzen";
+import FlixmonteureTeam from "@/components/FlixmonteureTeam";
 import MonteurKonfigurator from "@/components/MonteurKonfigurator";
 import AbschlussCTA from "@/components/AbschlussCTA";
 import Footer from "@/components/Footer";
@@ -22,11 +24,18 @@ export default function HandwerkPage() {
   return (
     <>
       <main>
-        {/* Reihenfolge Fachgebiete (im Hero) → KPIs → Referenzen → Case Studies →
-            Warum Fix Monteure → Konfigurator (Website-Review 03.07.2026) */}
+        {/* Reihenfolge laut Website-Review 17.07.2026: Logos-Band → All-inclusive-
+            Checkliste → KPIs → Referenzprojekte → Warum Fix Monteure →
+            Konfigurator → Team/Kontakt.
+            Die große Referenzen-Logowand entfällt hier bewusst (22.07.2026) —
+            das schmale Logo-Band unter dem Hero übernimmt diese Rolle.
+            Google-Bewertungen sind ebenfalls ausgeblendet: für Fix Monteure
+            liegen noch zu wenige vor; in 1–2 Monaten erneut prüfen, sobald die
+            Google Place ID vorliegt. */}
         <BereichHero b={b} />
+        <LogoBand gruppe="handwerk" />
+        <AllInclusive />
         <FlixmonteureKennzeichen />
-        <Referenzen gruppe="handwerk" googleBewertungen />
         <CaseStudyTabs
           id="case-study"
           titel="Referenzprojekte aus dem Handwerk"
@@ -39,7 +48,9 @@ export default function HandwerkPage() {
         />
         <FlixmonteureUsps />
         <MonteurKonfigurator />
+        <FlixmonteureTeam />
         <AbschlussCTA
+          telefon="+49 551 790 988 53"
           kontaktHref="#konfigurator"
           kontaktLabel="Fachkräfte anfragen"
           titel="Kurzfristig Fachkräfte für Ihr Projekt?"

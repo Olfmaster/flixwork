@@ -26,9 +26,12 @@ export default function Home() {
         <Referenzen googleBewertungen />
         <Testimonials />
         <Auszeichnung />
-        <WarumFlixwork />
         <Erfolgsgeschichten />
         <CaseStudy cs={caseStudies.masterVendor} id="master-vendor" />
+        {/* Vergleich Flixwork vs. Konzerne erst nach Referenzen und
+            Erfolgsgeschichten (Website-Review 17.07.2026) — der Beleg kommt vor
+            der Argumentation. */}
+        <WarumFlixwork />
         <WarumFlixworkGrosskunden />
         <Leistungszahlen />
         <AnfrageFormular />

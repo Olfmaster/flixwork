@@ -1,23 +1,25 @@
 import Reveal from "./Reveal";
 
-// "Warum sich Kunden für Flixmonteure entscheiden" (Kundenmail Handwerk).
-// Die 5 USPs aus der Seitenstruktur, angereichert mit den Punkten aus der
-// 7er-Liste "Warum sich Kunden entscheiden" (zusammengeführt, keine Dopplung).
-// Dunkles Band nach den drei Case Studies, Abschluss-Claim darunter.
+// "Warum Fix Monteure" (Website-Review 17.07.2026). Reihenfolge ist die im
+// Termin festgelegte Priorität: persönlicher Ansprechpartner (1), 100 %
+// Kalkulierbarkeit (2), bundesweite Verfügbarkeit (3), Flexibilität durch
+// Fahrzeug-/Werkzeug-Ausstattung (4). Danach die beiden Punkte von
+// flixmonteure.com, die inhaltlich nicht doppeln.
 const usps = [
-  ["Spezialisierung statt Generalist", "Spezialisiert auf SHK, Elektro und TGA — kein allgemeiner Personaldienstleister."],
-  ["Komplettlösung inkl. Unterkunft & Anreise", "Unterkunft, Anreise und Ausstattung organisieren wir vollständig."],
-  ["Bundesweite Rekrutierung", "Bundesweite Verfügbarkeit qualifizierter Fachkräfte mit schnellen Reaktionszeiten."],
-  ["Flexible Projektteams", "Flexible Skalierung bei Auftragsspitzen — projektbezogen zusammengestellt."],
-  ["Persönliche Betreuung", "Fester Ansprechpartner und langfristige Partnerschaften statt kurzfristiger Lösungen."],
+  ["Persönlicher Ansprechpartner", "Ein fester Ansprechpartner, der Ihr Projekt kennt — direkt erreichbar, ohne Callcenter und ohne Hierarchieebenen."],
+  ["100 % kalkulierbar", "Ein Stundensatz, alles inklusive. Fahrzeug, Werkzeug, Unterkunft und PSA sind bereits enthalten — keine Nachträge."],
+  ["Bundesweit verfügbar", "Unsere Monteure sind mobil und deutschlandweit im Einsatz — regional wie überregional, auch mehrtägig."],
+  ["Flexibel durch Ausstattung", "Weil Fahrzeug und Werkzeug mitkommen, ist der Monteur am ersten Tag produktiv — auch bei kurzfristigen Umdispositionen."],
+  ["Spezialisiert statt Generalist", "Schwerpunkt Haus-, Gebäude- und Versorgungstechnik: SHK, Elektro, Lüftung und TGA — kein allgemeiner Personaldienstleister."],
+  ["Skalierbare Projektteams", "Vom einzelnen Monteur bis zum kompletten Team — projektbezogen zusammengestellt und bei Auftragsspitzen erweiterbar."],
 ];
 
 export default function FlixmonteureUsps() {
   return (
-    <section className="flx-hero-bg text-white">
+    <section id="warum-fix-monteure" className="flx-hero-bg text-white">
       <div className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-soft">Warum Flixmonteure</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-soft">Warum Fix Monteure</p>
           <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight md:text-4xl">
             Warum sich Kunden für Flixmonteure entscheiden
           </h2>

@@ -2,10 +2,13 @@ import Reveal from "./Reveal";
 
 // Kernbotschaft: inhabergeführt = schnelle Entscheidungen. Der direkte Vergleich
 // mit dem Konzernanbieter macht den Vorteil messbar statt behauptet.
+//
+// Alle Zeitangaben bewusst in derselben Einheit (Werktage) — gemischte Einheiten
+// (Stunden vs. Wochen) machten den Vergleich unlesbar (Website-Review 17.07.2026).
 const vergleich = [
-  ["Vertragsunterzeichnung", "Innerhalb von 1 Tag", "Bis zu 28 Tage"],
-  ["Rahmenverträge", "5 Werktage", "Bis zu 42 Tage"],
-  ["Entscheidungen", "Innerhalb von 48 Stunden", "Durchschnittlich 8 Werktage"],
+  ["Vertragsunterzeichnung", "1 Werktag", "Bis zu 20 Werktage"],
+  ["Rahmenverträge", "5 Werktage", "Bis zu 22 Werktage"],
+  ["Entscheidungen", "2 Werktage", "Durchschnittlich 8 Werktage"],
   ["Ansprechpartner", "Direkte Entscheider", "Mehrere Hierarchieebenen"],
   ["Sonderlösungen", "Schnell umsetzbar", "Oft langwierige Freigaben"],
   ["Reaktionsgeschwindigkeit", "Sofort", "Häufig verzögert"],
@@ -47,7 +50,7 @@ export default function WarumFlixwork() {
         <Reveal className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky">Warum Flixwork</p>
           <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-navy md:text-4xl">
-            Inhabergeführt statt Konzern — deshalb entscheiden wir in Stunden,
+            Inhabergeführt statt Konzern — deshalb entscheiden wir in Werktagen,
             nicht in Wochen.
           </h2>
           <p className="mt-5 leading-relaxed text-navy/65">

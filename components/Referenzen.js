@@ -1,32 +1,11 @@
 import Reveal from "./Reveal";
 import GoogleBewertungen from "./GoogleBewertungen";
+import { kunden } from "@/lib/referenzen";
 
 // Kundenreferenzen. Logos liegen in /public/kunden und werden einheitlich auf
 // blauer Kachel als weiße Silhouette dargestellt (Wunsch 30.06.2026). Fehlt ein
-// Logo, wird der Firmenname als weiße Wortmarke gezeigt.
-//
-// Jede Referenz ist einem Bereich zugeordnet (gruppe). Über die optionale
-// `gruppe`-Prop filtern die Unterseiten auf ihren Bereich (Design-Review: keine
-// Vermischung); ohne Prop (Startseite) erscheinen alle als gemeinsame Logo-Wand.
-const kunden = [
-  { name: "ID Logistics", file: "id-logistics.png", url: "https://www.id-logistics.com/", gruppe: "logistik", bereich: "E-Commerce Logistik", text: "Internationale Kontraktlogistik und E-Commerce-Lösungen" },
-  { name: "Radial Europe", file: "radial.png", url: "https://www.radial.com/eur", gruppe: "logistik", bereich: "E-Commerce Logistik", text: "E-Commerce Fulfillment" },
-  { name: "W&L Jordan (JOKA)", file: "joka.png", url: "https://www.joka.de/", gruppe: "logistik", bereich: "Zentrallager Logistik", text: "Bodenbeläge und Innenausstattung" },
-  { name: "Geis Gruppe", file: "geis.png", url: "https://geis-group.eu/", gruppe: "logistik", bereich: "Fulfillment Logistik", text: "Logistik und Supply Chain" },
-  { name: "DHL Group", file: "dhl.png", url: "https://group.dhl.com/", gruppe: "logistik", bereich: "Fulfillment Logistik", text: "Internationale Logistik" },
-  { name: "Rudolph Logistik Gruppe", file: "rudolph.png", url: "https://www.rudolph-log.com/", gruppe: "logistik", bereich: "Automotive Logistik", text: "Automotive- und Industrielogistik mit rund 5.200 Mitarbeitenden an 45 Standorten" },
-  { name: "Vinylit Fassadensysteme", file: "vinylit.png", url: "https://www.vinylit.de/", gruppe: "industrie", bereich: "Kunststoffindustrie", text: "Individuelle Fassaden- und Dachsysteme, Made in Germany" },
-  { name: "Wetekam Group", file: "wetekam.png", url: "https://wetekamgroup.com/", gruppe: "industrie", bereich: "Kunststoffindustrie", text: "Technische Monofile und Kunststofflösungen" },
-  { name: "AKG Group", file: "akg.png", url: "https://www.akg-group.com/", gruppe: "industrie", bereich: "Metall- & Elektroindustrie", text: "Führende Wärmetauschertechnologie" },
-  { name: "Jäkel", file: "jaekel.png", url: "https://www.jaekel.eu/", gruppe: "industrie", bereich: "Metall- & Elektroindustrie", text: "Maschinenmesserfabrik — Quality made in Germany since 1928" },
-  // Handwerk / Flixmonteure
-  { name: "Kohl Wasser Wärme", file: "kohl.png", url: "https://www.kohl-online.de/", gruppe: "handwerk", bereich: "SHK & Wärmetechnik", text: "Wasser- und Wärmetechnik" },
-  { name: "Dräger", file: "draeger.png", url: "https://www.draeger.com/de_de/Home", gruppe: "handwerk", bereich: "Medizin- & Sicherheitstechnik", text: "Technik für das Leben — Medizin- und Sicherheitstechnik" },
-  { name: "Germania Wärmesysteme", file: null, url: "https://waermesystem.com/waermepumpen-technik/", gruppe: "handwerk", bereich: "Wärmepumpen-Technik", text: "Wärmepumpen und moderne Wärmesysteme" },
-  { name: "Schulz Sanitärtechnik", file: "schulz.png", url: "https://www.schulz-sanitaertechnik.de/", gruppe: "handwerk", bereich: "Sanitärtechnik", text: "Sanitär-, Heizungs- und Klimatechnik" },
-  { name: "Schwier Kältetechnik", file: "schwier.svg", url: "https://www.schwier-kaelte.de/de/", gruppe: "handwerk", bereich: "Kältetechnik", text: "Kälte- und Klimatechnik" },
-];
-
+// Logo, wird der Firmenname als weiße Wortmarke gezeigt. Die Daten liegen in
+// lib/referenzen.js, weil sie auch das Logo-Band unter dem Hero speist.
 // Überschrift/Intro je Bereich. Handwerk vermeidet bewusst "bauen".
 const kopf = {
   all: {

@@ -2,10 +2,14 @@
 import { useActionState, useMemo, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { sendAnfrage } from "@/lib/anfrage-action";
+import KontaktPopup, { track } from "./KontaktPopup";
 
 // Preislogik mit den echten Flixwork-Sätzen (aktualisierte Kalkulation von
 // Andre, 07/2026): Grundpreis 37,00 €/h, Spezialkenntnisse 41,00 €/h.
-// Mindestlaufzeit 1 Monat, Laufzeitrabatt ab 6 Monaten -1 %, ab 12 Monaten -3 %.
+// Mindesteinsatzdauer 1 Monat. Die frühere Rabattstaffel nach Einsatzdauer
+// (1/6/12 Monate) ist bewusst entfernt (Website-Review 17.07.2026) — sie hat im
+// Vertrieb unerwünschte Rabattdiskussionen ausgelöst. Bitte nicht wieder
+// einbauen.
 // Add-ons: Montage-Paket (An-/Abreise, Unterkunft, Verpflegungspauschale &
 // Firmenwagen, nur zusammen buchbar) 10,00 €, Werkzeug Basic 2,00 €,
 // Übernachtungszuschlag in Top-Städten (München, Hamburg, Frankfurt, Köln,
@@ -19,11 +23,6 @@ const FACHGEBIETE = [
   { id: "elektro", label: "Elektro" },
   { id: "shk", label: "Sanitär, Heizung & Klima" },
   { id: "versorgung", label: "Versorgungstechnik" },
-];
-const DAUER = [
-  { id: "1monat", label: "1 Monat", rabatt: 0 },
-  { id: "6monate", label: "6 Monate", rabatt: 0.01 },
-  { id: "12monate", label: "12 Monate", rabatt: 0.03 },
 ];
 const OPTIONEN = [
   { id: "montagepaket", label: "Montage-Paket", auf: 10 },
@@ -52,9 +51,9 @@ function SubmitButton() {
 export default function MonteurKonfigurator() {
   const [tarif, setTarif] = useState("standard");
   const [fach, setFach] = useState("elektro");
-  const [dauer, setDauer] = useState("1monat");
   const [anzahl, setAnzahl] = useState(MIN_MONTEURE);
   const [opts, setOpts] = useState({ montagepaket: true, werkzeug: true, topstaedte: false });
+  const [aufgaben, setAufgaben] = useState("");
   const [state, formAction] = useActionState(sendAnfrage, initial);
 
   const toggle = (id) => setOpts((o) => ({ ...o, [id]: !o[id] }));
@@ -62,23 +61,24 @@ export default function MonteurKonfigurator() {
   const { rate, tagessatz, details } = useMemo(() => {
     const t = TARIFE.find((x) => x.id === tarif);
     const f = FACHGEBIETE.find((x) => x.id === fach);
-    const d = DAUER.find((x) => x.id === dauer);
     const optAuf = OPTIONEN.filter((o) => opts[o.id]).reduce((s, o) => s + o.auf, 0);
-    const r = (t.basis + optAuf) * (1 - d.rabatt);
+    const r = t.basis + optAuf;
     const tag = r * 8 * anzahl;
     const gewaehlteOpts = OPTIONEN.filter((o) => opts[o.id]).map((o) => o.label);
     const det = [
       `Tarif: ${t.label} (${eur.format(t.basis)}/Std.)`,
       `Fachgebiet: ${f.label}`,
-      `Einsatzdauer: ${d.label}${d.rabatt ? ` (${(d.rabatt * 100).toFixed(0)} % Laufzeitrabatt)` : ""}`,
       `Anzahl Monteure: ${anzahl}`,
       `Zusatzoptionen: ${gewaehlteOpts.length ? gewaehlteOpts.join(", ") : "keine"}`,
       `Geschätzter Stundensatz: ${eur.format(r)} (unverbindlich, zzgl. MwSt.)`,
       `Geschätzter Tagessatz (8 Std. × ${anzahl}): ${eur.format(tag)}`,
       `An-/Abfahrt-Pauschale: ${eur.format(ANFAHRT)} (einmalig)`,
+      "",
+      "Aufgaben/Tätigkeiten:",
+      aufgaben.trim() || "(keine Angabe)",
     ].join("\n");
     return { rate: r, tagessatz: tag, details: det };
-  }, [tarif, fach, dauer, anzahl, opts]);
+  }, [tarif, fach, anzahl, opts, aufgaben]);
 
   return (
     <section id="konfigurator" className="bg-mist py-20 md:py-28">
@@ -117,19 +117,7 @@ export default function MonteurKonfigurator() {
               </div>
             </Block>
 
-            <Block label="3 · Einsatzdauer">
-              <div className="flex flex-wrap gap-2">
-                {DAUER.map((d) => (
-                  <Chip key={d.id} active={dauer === d.id} onClick={() => setDauer(d.id)}>
-                    {d.label}
-                    {d.rabatt > 0 ? ` · -${(d.rabatt * 100).toFixed(0)} %` : ""}
-                  </Chip>
-                ))}
-              </div>
-              <p className="mt-3 text-xs text-navy/45">Mindestlaufzeit 1 Monat.</p>
-            </Block>
-
-            <Block label="4 · Anzahl Monteure">
+            <Block label="3 · Anzahl Monteure">
               <div className="inline-flex items-center gap-4 rounded-full border border-navy/15 px-2 py-1.5">
                 <Stepper aria-label="weniger" onClick={() => setAnzahl((n) => Math.max(MIN_MONTEURE, n - 1))}>−</Stepper>
                 <span className="w-8 text-center text-lg font-bold text-navy">{anzahl}</span>
@@ -138,7 +126,7 @@ export default function MonteurKonfigurator() {
               <p className="mt-3 text-xs text-navy/45">Mindestabnahme: {MIN_MONTEURE} Monteure.</p>
             </Block>
 
-            <Block label="5 · Zusatzoptionen">
+            <Block label="4 · Zusatzoptionen">
               <div className="flex flex-wrap gap-2">
                 {OPTIONEN.map((o) => (
                   <Chip key={o.id} active={opts[o.id]} onClick={() => toggle(o.id)}>
@@ -151,6 +139,19 @@ export default function MonteurKonfigurator() {
                 Montage-Paket = An-/Abreise, Unterkunft, Verpflegungspauschale &amp; Firmenwagen (nur zusammen buchbar).
                 Übernachtungszuschlag gilt für München, Hamburg, Frankfurt, Köln und Düsseldorf.
               </p>
+            </Block>
+
+            {/* Freiwilliges Notizfeld (Website-Review 17.07.2026) — bewusst kein
+                Pflichtfeld, damit die Anfrage nicht daran scheitert. */}
+            <Block label="5 · Aufgaben / Tätigkeiten (optional)">
+              <textarea
+                value={aufgaben}
+                onChange={(e) => setAufgaben(e.target.value)}
+                rows={3}
+                maxLength={2000}
+                placeholder="Was soll der Monteur konkret übernehmen? z. B. Rohrleitungsbau, Heizungsmontage, Schaltschrankverdrahtung — inkl. Einsatzort und Zeitraum."
+                className="w-full resize-none rounded-lg border border-navy/15 bg-white px-4 py-3 text-sm text-navy placeholder-navy/35 focus:border-sky focus:outline-none"
+              />
             </Block>
           </div>
 
@@ -167,11 +168,21 @@ export default function MonteurKonfigurator() {
             <p className="mt-1 text-sm text-white/70">
               + {eur.format(ANFAHRT)} An-/Abfahrt <span className="text-white/40">(einmalig)</span>
             </p>
-            <p className="mt-2 text-xs text-white/40">
-              *Unverbindliche Schätzung, zzgl. MwSt. Mindestlaufzeit 1 Monat, Mindestabnahme {MIN_MONTEURE} Monteure. Das finale Angebot stellen wir individuell.
+            {/* Mindesteinsatzdauer klar kommunizieren (Website-Review 17.07.2026) */}
+            <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 px-4 py-3">
+              <p className="text-sm font-semibold text-white">Mindesteinsatz: 1 Monat</p>
+              <p className="mt-1 text-xs leading-relaxed text-white/55">
+                Die gesetzliche Höchstüberlassungsdauer beträgt 18 Monate; bei
+                Einsätzen unter einem eigenen Tarifvertrag sind längere Laufzeiten
+                möglich. Die Dauer stimmen wir individuell mit Ihnen ab.
+              </p>
+            </div>
+
+            <p className="mt-3 text-xs text-white/40">
+              *Unverbindliche Schätzung, zzgl. MwSt. Mindestabnahme {MIN_MONTEURE} Monteure. Das finale Angebot stellen wir individuell.
             </p>
 
-            <form action={formAction} className="mt-6 space-y-3">
+            <form action={formAction} onSubmit={() => track("konfigurator_anfrage")} className="mt-6 space-y-3">
               <input type="hidden" name="typ" value="konfigurator" />
               <input type="hidden" name="details" value={details} />
               <Field name="kontaktFirma" placeholder="Firma *" required />
@@ -189,6 +200,14 @@ export default function MonteurKonfigurator() {
               <SubmitButton />
               <p className="text-center text-xs text-white/40">Anfrage geht an Herrn Wolf · keine Verpflichtung</p>
             </form>
+
+            {/* Zweiter Anfrageweg als Pop-out (Website-Review 17.07.2026) —
+                bewusst außerhalb des Formulars, da das Pop-out ein eigenes
+                Formular enthält. Beide Wege senden ein eigenes GA-Event, damit
+                sich auswerten lässt, welcher besser konvertiert. */}
+            <KontaktPopup className="mt-3 w-full rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+              Lieber persönlich? Kontaktformular öffnen
+            </KontaktPopup>
           </div>
         </div>
       </div>

@@ -59,6 +59,11 @@ body {
 .flx-marquee {
   animation: flx-marquee 28s linear infinite;
 }
+/* Logo-Band unter dem Hero: doppelte Laufzeit = halbe Geschwindigkeit, damit
+   die Logos lesbar bleiben (Kundenwunsch 22.07.2026). */
+.flx-marquee-slow {
+  animation-duration: 56s;
+}
 @media (prefers-reduced-motion: reduce) {
   .flx-marquee {
     animation: none;
