@@ -10,10 +10,17 @@ import KontaktPopup, { track } from "./KontaktPopup";
 // (1/6/12 Monate) ist bewusst entfernt (Website-Review 17.07.2026) — sie hat im
 // Vertrieb unerwünschte Rabattdiskussionen ausgelöst. Bitte nicht wieder
 // einbauen.
-// Add-ons: Montage-Paket (An-/Abreise, Unterkunft, Verpflegungspauschale &
-// Firmenwagen, nur zusammen buchbar) 10,00 €, Werkzeug Basic 2,00 €,
-// Übernachtungszuschlag in Top-Städten (München, Hamburg, Frankfurt, Köln,
-// Düsseldorf) +2,00 €. Zusätzlich An-/Abfahrt-Pauschale 295 € einmalig.
+// Add-ons: Montage-Paket (Unterkunft, Verpflegungspauschale & Firmenwagen, nur
+// zusammen buchbar) 10,00 €, Werkzeug Basic 2,00 €, Übernachtungszuschlag in
+// Top-Städten (München, Hamburg, Frankfurt, Köln, Düsseldorf) +2,00 €.
+// Zusätzlich An-/Abfahrt-Pauschale 179 € einmalig (Kundenwunsch 31.08.2026,
+// vorher 295 €).
+// Die An-/Abreise ist bewusst NICHT mehr Teil der Montage-Paket-Beschreibung
+// (Kundenwunsch 31.08.2026): sie wurde dort genannt und gleichzeitig als
+// Pauschale berechnet, was bei genauer Preisprüfung durch den Einkauf wie eine
+// doppelte Berechnung wirkt. Entweder die Pauschale entfällt beim Montage-Paket
+// oder die An-/Abreise wird dort nicht genannt. Umgesetzt ist die zweite
+// Variante, damit die Pauschale weiter kalkuliert werden kann.
 // Mindestabnahme 2 Monteure.
 const TARIFE = [
   { id: "standard", label: "Standard-Monteur", basis: 37 },
@@ -29,7 +36,7 @@ const OPTIONEN = [
   { id: "werkzeug", label: "Werkzeug (Basic)", auf: 2 },
   { id: "topstaedte", label: "Übernachtungszuschlag Top-Städte", auf: 2 },
 ];
-const ANFAHRT = 295; // An-/Abfahrt-Pauschale, einmalig, zusätzlich zum Montage-Paket
+const ANFAHRT = 179; // An-/Abfahrt-Pauschale, einmalig, zusätzlich zum Montage-Paket
 const MIN_MONTEURE = 2;
 
 const eur = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
@@ -136,7 +143,8 @@ export default function MonteurKonfigurator() {
                 ))}
               </div>
               <p className="mt-3 text-xs text-navy/45">
-                Montage-Paket = An-/Abreise, Unterkunft, Verpflegungspauschale &amp; Firmenwagen (nur zusammen buchbar).
+                Montage-Paket = Unterkunft, Verpflegungspauschale &amp; Firmenwagen (nur zusammen buchbar).
+                Die An- und Abfahrt wird separat als einmalige Pauschale von {eur.format(ANFAHRT)} berechnet.
                 Übernachtungszuschlag gilt für München, Hamburg, Frankfurt, Köln und Düsseldorf.
               </p>
             </Block>

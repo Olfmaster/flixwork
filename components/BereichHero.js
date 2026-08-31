@@ -35,7 +35,7 @@ export default function BereichHero({ b }) {
                 <span aria-hidden="true">→</span>
               </a>
               <a
-                href="/#schwerpunkte"
+                href="/unternehmen#schwerpunkte"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
                 Zurück zur Übersicht

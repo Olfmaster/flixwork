@@ -1,11 +1,14 @@
 import Reveal from "./Reveal";
 
-// "Warum Fix Monteure" (Website-Review 17.07.2026). Reihenfolge ist die im
-// Termin festgelegte Priorität: persönlicher Ansprechpartner (1), 100 %
-// Kalkulierbarkeit (2), bundesweite Verfügbarkeit (3), Flexibilität durch
-// Fahrzeug-/Werkzeug-Ausstattung (4). Danach die beiden Punkte von
-// flixmonteure.com, die inhaltlich nicht doppeln.
+// "Warum Flixmonteure" (Website-Review 17.07.2026, ergänzt 31.08.2026).
+// Reihenfolge: individuell zugeschnitten (1, Kundenwunsch 31.08.2026, bewusst
+// plakativ als Gegenpol zum Standardprodukt "Monteur mit Fahrzeug und
+// Werkzeug", das in Kundengesprächen zunehmend negativ auffällt), persönlicher
+// Ansprechpartner (2), 100 % Kalkulierbarkeit (3), bundesweite Verfügbarkeit
+// (4), Flexibilität durch Fahrzeug-/Werkzeug-Ausstattung (5). Danach die beiden
+// Punkte von flixmonteure.com, die inhaltlich nicht doppeln.
 const usps = [
+  ["Individuell auf Sie zugeschnitten", "Viele Anbieter haben ein Standardprodukt: Monteur, Fahrzeug, Werkzeug, fertig. Wir richten Qualifikation, Ausstattung und Ablauf nach Ihren Anforderungen aus und passen sie an, sobald sich Ihr Projekt ändert. Ihre Ansprüche geben den Takt vor."],
   ["Persönlicher Ansprechpartner", "Ein fester Ansprechpartner, der Ihr Projekt kennt — direkt erreichbar, ohne Callcenter und ohne Hierarchieebenen."],
   ["100 % kalkulierbar", "Ein Stundensatz, alles inklusive. Fahrzeug, Werkzeug, Unterkunft und PSA sind bereits enthalten — keine Nachträge."],
   ["Bundesweit verfügbar", "Unsere Monteure sind mobil und deutschlandweit im Einsatz — regional wie überregional, auch mehrtägig."],
@@ -16,10 +19,10 @@ const usps = [
 
 export default function FlixmonteureUsps() {
   return (
-    <section id="warum-fix-monteure" className="flx-hero-bg text-white">
+    <section id="warum-flixmonteure" className="flx-hero-bg text-white">
       <div className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-soft">Warum Fix Monteure</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-soft">Warum Flixmonteure</p>
           <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight md:text-4xl">
             Warum sich Kunden für Flixmonteure entscheiden
           </h2>

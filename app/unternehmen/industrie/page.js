@@ -16,7 +16,7 @@ export const metadata = {
   title: "Industrie-Personal",
   description:
     "Sorgfältig ausgewählte Fach- und Hilfskräfte für die Industrie: Produktionshelfer, Maschinenführer und Qualitätsprüfer — mit strukturierten Vorstellungsgesprächen und durchgängiger Qualitätssicherung von Flixwork.",
-  alternates: { canonical: "/industrie" },
+  alternates: { canonical: "/unternehmen/industrie" },
 };
 
 export default function IndustriePage() {

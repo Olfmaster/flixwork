@@ -3,16 +3,32 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "@/public/flixwork-logo.png";
 
-// Hauptnavigation: die drei Geschäftsbereiche als eigene Unterseiten, dazu die
-// Jobbörse der bestehenden Bewerberwelt. Logo führt zur Unternehmens-Startseite.
-// TODO: MAIN_SITE auf die echte Domain der bestehenden Seite setzen.
-const MAIN_SITE = "https://www.flixwork.de";
-const links = [
-  { label: "Logistik", href: "/logistik", external: false },
-  { label: "Industrie", href: "/industrie", external: false },
-  { label: "Handwerk", href: "/handwerk", external: false },
-  { label: "Jobbörse", href: `${MAIN_SITE}/jobboerse`, external: true },
-];
+// Hauptnavigation für beide Welten. `variant` entscheidet, ob die Leiste zur
+// Unternehmensseite oder zur Bewerberseite gehört. Beide verlinken jeweils die
+// andere Welt, damit niemand über die Startseite zurück muss.
+const NAV = {
+  unternehmen: {
+    home: "/unternehmen",
+    links: [
+      { label: "Logistik", href: "/unternehmen/logistik" },
+      { label: "Industrie", href: "/unternehmen/industrie" },
+      { label: "Handwerk", href: "/unternehmen/handwerk" },
+      { label: "Über uns", href: "/about" },
+      { label: "Für Bewerber", href: "/jobs" },
+    ],
+    cta: { label: "Personal anfragen", href: "/unternehmen#anfrage" },
+  },
+  bewerber: {
+    home: "/jobs",
+    links: [
+      { label: "Jobbörse", href: "/jobs" },
+      { label: "Prämie sichern", href: "/mitarbeiter-werben-mitarbeiter" },
+      { label: "Über uns", href: "/about" },
+      { label: "Für Unternehmen", href: "/unternehmen" },
+    ],
+    cta: { label: "Jetzt bewerben", href: "/bewerben" },
+  },
+};
 
 const socials = [
   {
@@ -36,7 +52,8 @@ const socials = [
 // ausschließlich das Flixmonteure-Logo statt des Flixwork-Logos — finale
 // Platzierung im Header hängt von der Abstimmung mit dem bestehenden
 // Webdesigner von Flixwork ab.
-export default function Navbar({ logoOverride }) {
+export default function Navbar({ logoOverride, variant = "unternehmen" }) {
+  const { home, links, cta } = NAV[variant] ?? NAV.unternehmen;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -58,7 +75,7 @@ export default function Navbar({ logoOverride }) {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
-        <a href="/" className="flex items-center" aria-label="Flixwork Startseite">
+        <a href={home} className="flex items-center" aria-label="Flixwork Startseite">
           {logoOverride ? (
             <img
               src={logoOverride.src}
@@ -112,12 +129,10 @@ export default function Navbar({ logoOverride }) {
           </div>
 
           <a
-            href={`${MAIN_SITE}/bewerben`}
-            target="_blank"
-            rel="noopener"
+            href={cta.href}
             className="rounded-full bg-sky px-5 py-2 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-[1.03] hover:bg-sky-soft"
           >
-            Jetzt bewerben
+            {cta.label}
           </a>
         </div>
 
@@ -168,12 +183,11 @@ export default function Navbar({ logoOverride }) {
             ))}
           </div>
           <a
-            href={`${MAIN_SITE}/bewerben`}
-            target="_blank"
-            rel="noopener"
+            href={cta.href}
+            onClick={() => setOpen(false)}
             className="mt-4 block rounded-full bg-sky px-5 py-3 text-center text-sm font-semibold text-white"
           >
-            Jetzt bewerben
+            {cta.label}
           </a>
           <div className="mt-5 flex items-center justify-center gap-6">
             {socials.map((s) => (

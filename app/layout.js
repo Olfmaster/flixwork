@@ -7,10 +7,12 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = "https://unternehmen.flixwork.de";
-const TITLE = "Flixwork — Qualifiziertes Personal für Ihr Unternehmen";
+// TODO: SITE_URL auf die finale Domain setzen, sobald die neue Seite die alte
+// ablöst (voraussichtlich https://www.flixwork.de).
+const SITE_URL = "https://www.flixwork.de";
+const TITLE = "Flixwork — regional, schnell & zuverlässig";
 const DESCRIPTION =
-  "Überlassung von Fach-, Führungs- und Hilfskräften in Logistik, Industrie und Handwerk. Inhabergeführt, persönlich, bundesweit — mit Monteur-Konfigurator und schneller Personalanfrage.";
+  "Flixwork verbindet Menschen und Betriebe in Logistik, Industrie und Handwerk. Offene Stellen mit Bezahlung nach Tarif für Bewerber, verlässliche Personallösungen für Unternehmen.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -23,6 +25,8 @@ export const metadata = {
   keywords: [
     "Personaldienstleister",
     "Zeitarbeit",
+    "Jobs Kassel",
+    "Stellenangebote Logistik",
     "Arbeitnehmerüberlassung",
     "Logistik Personal",
     "Industrie Fachkräfte",

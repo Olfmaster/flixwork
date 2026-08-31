@@ -17,7 +17,7 @@ export const metadata = {
   title: "Logistik-Personal",
   description:
     "Flexibles Logistik-Personal von Flixwork: Lagerhelfer, Kommissionierer und Staplerfahrer — schnell skalierbar bei Saisonspitzen und Projektgeschäft. Inkl. Express-Shuttle für schwer erreichbare Standorte.",
-  alternates: { canonical: "/logistik" },
+  alternates: { canonical: "/unternehmen/logistik" },
 };
 
 export default function LogistikPage() {

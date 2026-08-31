@@ -17,7 +17,7 @@ export const metadata = {
   title: "Handwerk — Monteure für SHK, Elektro & TGA",
   description:
     "Flixmonteure: qualifizierte Monteure für SHK, Elektro, Lüftung und technische Gebäudeausrüstung — bundesweit, einsatzbereit mit Werkzeug, Fahrzeug und Organisation. Stellen Sie sich Ihren Monteur im Flixwork-Konfigurator zusammen.",
-  alternates: { canonical: "/handwerk" },
+  alternates: { canonical: "/unternehmen/handwerk" },
 };
 
 export default function HandwerkPage() {
@@ -25,11 +25,11 @@ export default function HandwerkPage() {
     <>
       <main>
         {/* Reihenfolge laut Website-Review 17.07.2026: Logos-Band → All-inclusive-
-            Checkliste → KPIs → Referenzprojekte → Warum Fix Monteure →
-            Konfigurator → Team/Kontakt.
+            Checkliste → KPIs → Referenzprojekte → Warum Flixmonteure →
+            Konfigurator → Kontakt.
             Die große Referenzen-Logowand entfällt hier bewusst (22.07.2026) —
             das schmale Logo-Band unter dem Hero übernimmt diese Rolle.
-            Google-Bewertungen sind ebenfalls ausgeblendet: für Fix Monteure
+            Google-Bewertungen sind ebenfalls ausgeblendet: für Flixmonteure
             liegen noch zu wenige vor; in 1–2 Monaten erneut prüfen, sobald die
             Google Place ID vorliegt. */}
         <BereichHero b={b} />

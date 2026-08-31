@@ -35,7 +35,7 @@ export default function AbschlussCTA({
               </a>
             ) : (
               <a
-                href="/#schwerpunkte"
+                href="/unternehmen#schwerpunkte"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
               >
                 Zur Bereichsauswahl

@@ -14,6 +14,16 @@
   --color-mist: #f4f7fc;
   --color-cloud: #e9f0fb;
   --color-ink: #1c2d5a;
+
+  /* ---- Bewerberwelt ---- */
+  /* Die Bewerberseiten nutzen dieselbe Primärfarbe, bekommen aber einen warmen
+     Flächenton und einen Signalakzent. Der Akzent ist bewusst KEINE zweite
+     Aktionsfarbe: Buttons bleiben überall Sky, das Signal markiert nur Prämien
+     und Lohnhighlights. Wenn das Corporate Design das nicht zulässt, reicht es,
+     diese zwei Werte hier zu ändern. */
+  --color-sand: #f8f5f0;
+  --color-signal: #e0622a;
+  --color-signal-soft: #fdeee6;
 }
 
 :root {

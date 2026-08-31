@@ -25,7 +25,7 @@ export default function Schwerpunkte() {
           {bereicheListe.map((b) => (
             <a
               key={b.slug}
-              href={`/${b.slug}`}
+              href={`/unternehmen/${b.slug}`}
               className="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-3xl p-8 text-white shadow-xl shadow-navy/10 transition-all hover:-translate-y-1"
             >
               <Image

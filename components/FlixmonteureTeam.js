@@ -1,15 +1,12 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
 
-// Team-Sektion der Handwerk-Seite, übernommen von flixmonteure.com: Foto,
-// Name, Funktion — darunter die direkten Kontaktwege. Unterstützt den
-// wichtigsten USP der Seite ("persönlicher Ansprechpartner") mit Gesichtern.
-const team = [
-  { name: "Tomasz Kowalski", rolle: "Personaldisponent", bild: "/monteure/Tomasz_Kowalski-Personaldisponent.jpg" },
-  { name: "Angela Nowak", rolle: "Kaufmännische Sachbearbeitung und Lohnbuchhaltung", bild: "/monteure/Angela_Nowak-Lohnbuchhaltung.jpg" },
-  { name: "Andreas Wolf", rolle: "Geschäftsführer", bild: "/monteure/Andreas_Wolf-Geschaeftsfuehrer.jpg" },
-];
-
+// Kontakt-Sektion der Handwerk-Seite.
+// Die drei Personenkarten von flixmonteure.com (Personaldisposition,
+// Lohnbuchhaltung, Geschäftsführung) sind am 31.08.2026 auf Kundenwunsch
+// entfallen: Ansprechpartner werden erst wieder gezeigt, wenn auch die anderen
+// Bereichsseiten (Logistik, Industrie) Vertriebsleitung und Geschäftsführung
+// abbilden. Dann kommt hier ausschließlich die Geschäftsführung zurück.
+// Die Fotos liegen weiterhin unter /public/monteure.
 const MAIL = "info@flixmonteure.com";
 const TELEFON = "+49 551 790 988 53";
 
@@ -23,38 +20,18 @@ function Icon({ path }) {
 
 export default function FlixmonteureTeam() {
   return (
-    <section id="team" className="bg-mist py-20 md:py-28">
+    <section id="kontakt" className="bg-mist py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky">Ihr Ansprechpartner</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy md:text-4xl">Unser Team</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky">Kontakt</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy md:text-4xl">Sprechen Sie uns direkt an.</h2>
           <p className="mt-4 leading-relaxed text-navy/65">
             Kontaktieren Sie uns gerne telefonisch, via E-Mail, WhatsApp oder
             hinterlassen Sie uns Ihre Kontaktdaten für einen Rückruf.
           </p>
         </Reveal>
 
-        <Reveal className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" stagger={0.12}>
-          {team.map((p) => (
-            <div key={p.name} className="overflow-hidden rounded-3xl bg-white shadow-sm">
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={p.bild}
-                  alt={p.name}
-                  fill
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="px-7 py-6">
-                <p className="text-xl font-bold text-navy">{p.name}</p>
-                <p className="mt-2 text-sm leading-relaxed text-navy/60">{p.rolle}</p>
-              </div>
-            </div>
-          ))}
-        </Reveal>
-
-        <Reveal className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <Reveal className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           {/* Button-Stil identisch zum Abschluss-CTA: gefüllte Pille für die
               Hauptaktion, umrandete Pille daneben. */}
           <a

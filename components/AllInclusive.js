@@ -63,13 +63,17 @@ export default function AllInclusive() {
             </Reveal>
           </div>
 
-          <Reveal y={36} className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+          {/* Quadratisches Seitenverhältnis statt 4:3 (Kundenwunsch
+              31.08.2026): Die Vorlage ist 600 × 600 px, im 4:3-Rahmen wurden
+              oben die Hecktüren und unten ein Teil des Werkzeugs abgeschnitten.
+              Quadratisch zeigt object-cover das Motiv vollständig und mittig. */}
+          <Reveal y={36} className="relative aspect-square overflow-hidden rounded-3xl">
             <Image
               src="/monteure/flixmonteure-fahrzeug01.jpg"
-              alt="Einsatzfahrzeug der Flixmonteure"
+              alt="Einsatzfahrzeug der Flixmonteure mit Markenwerkzeug"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
+              className="object-cover object-center"
             />
           </Reveal>
         </div>
