@@ -5,7 +5,7 @@ import BewerberCTA from "@/components/BewerberCTA";
 import DemoHinweis from "@/components/DemoHinweis";
 import Reveal from "@/components/Reveal";
 import Footer from "@/components/Footer";
-import { getJobs, getJob } from "@/lib/zvoove";
+import { getJobs, getJob, slugify } from "@/lib/zvoove";
 import { branche, formatLohn } from "@/lib/jobwelt";
 import { kontakt } from "@/lib/kontakt";
 
@@ -36,8 +36,12 @@ export async function generateMetadata({ params }) {
 // Google Jobs liest diese Auszeichnung aus. Auf der bisherigen Seite fehlt sie
 // vollständig, dadurch tauchen die Stellen dort nicht in der Jobsuche auf.
 function jobPostingSchema(job) {
+  // Eine Stelle läuft, bis sie in zvoove abgeschaltet wird. Ein Ablaufdatum ab
+  // Veröffentlichung würde die lange laufenden Dauerstellen bei Google als
+  // abgelaufen markieren, deshalb zählt validThrough ab heute. Die Seite wird
+  // alle 15 Minuten neu gebaut, das Datum bleibt also mitlaufend.
   const gepostet = job.aktualisiertAm || new Date().toISOString().slice(0, 10);
-  const gueltigBis = new Date(new Date(gepostet).getTime() + 90 * 86400000).toISOString().slice(0, 10);
+  const gueltigBis = new Date(Date.now() + 60 * 86400000).toISOString().slice(0, 10);
   const beschreibung = [
     job.kurztext ? `<p>${job.kurztext}</p>` : "",
     job.aufgaben?.length ? `<p><strong>Ihre Aufgaben</strong></p><ul>${job.aufgaben.map((a) => `<li>${a}</li>`).join("")}</ul>` : "",
@@ -96,6 +100,9 @@ export default async function JobDetail({ params }) {
   const jobs = await getJobs();
   const aehnlich = jobs.filter((j) => j.kategorie === job.kategorie && j.slug !== job.slug).slice(0, 2);
   const b = branche(job.kategorie);
+  // Betreff vorbelegen, damit die Disposition sofort sieht, um welche Stelle es
+  // geht, ohne dass der Bewerber das selbst tippen muss.
+  const mailHref = `${kontakt.mailHref}?subject=${encodeURIComponent(`Bewerbung: ${job.titel} in ${job.ort}`)}`;
 
   return (
     <>
@@ -112,7 +119,7 @@ export default async function JobDetail({ params }) {
                 </>
               ) : null}
               <span className="px-2">/</span>
-              <a href={`/jobs-in/${job.ort.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="hover:text-white">
+              <a href={`/jobs-in/${slugify(job.ort)}`} className="hover:text-white">
                 {job.ort}
               </a>
             </nav>
@@ -180,8 +187,13 @@ export default async function JobDetail({ params }) {
                     {job.praemie ? <Zeile label="Startprämie">{job.praemie} €</Zeile> : null}
                   </dl>
 
+                  {/* Der Hauptweg führt in das Bewerberportal von zvoove, wo die
+                      Bewerbung samt Unterlagen direkt im System landet. Fehlt der
+                      Link bei einer Stelle, bleibt das kurze Formular der Website
+                      als Rückfallebene. */}
                   <a
-                    href={`/bewerben?job=${job.slug}`}
+                    href={job.bewerbungsUrl ?? `/bewerben?job=${job.slug}`}
+                    {...(job.bewerbungsUrl ? { target: "_blank", rel: "noopener" } : {})}
                     className="mt-7 block rounded-full bg-sky px-6 py-4 text-center text-base font-semibold text-white transition-colors hover:bg-sky-soft"
                   >
                     Auf diese Stelle bewerben
@@ -194,12 +206,20 @@ export default async function JobDetail({ params }) {
                   >
                     Per WhatsApp fragen
                   </a>
-                  <p className="mt-4 text-center text-xs text-white/45">
-                    Oder anrufen:{" "}
-                    <a href={kontakt.telefonHref} className="font-semibold text-white/70 hover:underline">
-                      {kontakt.telefon}
-                    </a>
-                  </p>
+                  <div className="mt-4 space-y-1 text-center text-xs text-white/45">
+                    <p>
+                      Oder anrufen:{" "}
+                      <a href={kontakt.telefonHref} className="font-semibold text-white/70 hover:underline">
+                        {kontakt.telefon}
+                      </a>
+                    </p>
+                    <p>
+                      E-Mail schreiben:{" "}
+                      <a href={mailHref} className="font-semibold text-white/70 hover:underline">
+                        {kontakt.mail}
+                      </a>
+                    </p>
+                  </div>
                 </div>
               </div>
             </aside>

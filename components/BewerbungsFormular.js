@@ -117,6 +117,23 @@ export default function BewerbungsFormular({ job }) {
           WhatsApp
         </a>
       </p>
+
+      {/* Zweiter Weg für alle, die ihre Unterlagen schon beisammen haben. Er
+          führt in das Bewerberportal von zvoove, wo die Bewerbung samt Anhängen
+          direkt im System landet. */}
+      {job?.bewerbungsUrl ? (
+        <p className="mt-3 border-t border-navy/5 pt-4 text-center text-sm text-navy/55">
+          Unterlagen schon bereit?{" "}
+          <a
+            href={job.bewerbungsUrl}
+            target="_blank"
+            rel="noopener"
+            className="font-semibold text-sky hover:underline"
+          >
+            Mit vollständigen Unterlagen bewerben
+          </a>
+        </p>
+      ) : null}
     </form>
   );
 }
