@@ -21,23 +21,36 @@ export default function Counter({ to, prefix = "", suffix = "", duration = 1.8, 
     const obj = { v: 0 };
     const ctx = gsap.context(() => {
       el.textContent = `${prefix}0${suffix}`;
-      ScrollTrigger.create({
+
+      const hochzaehlen = () =>
+        gsap.to(obj, {
+          v: to,
+          duration,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent = `${prefix}${Math.round(obj.v)}${suffix}`;
+          },
+        });
+
+      const st = ScrollTrigger.create({
         trigger: el,
         start: "top 92%",
         once: true,
-        onEnter: () =>
-          gsap.to(obj, {
-            v: to,
-            duration,
-            ease: "power2.out",
-            onUpdate: () => {
-              el.textContent = `${prefix}${Math.round(obj.v)}${suffix}`;
-            },
-          }),
+        onEnter: hochzaehlen,
       });
+
+      // Steht die Zahl beim Laden schon im Bild, gibt es für ScrollTrigger
+      // keinen Übergang zu melden und onEnter feuert nie. Die Zahl blieb dann
+      // auf 0 stehen, bis jemand scrollte, im Hero der Jobbörse also gut
+      // sichtbar als „0 offene Stellen". Ein refresh() allein behebt das nicht,
+      // deshalb hier selbst prüfen und in dem Fall direkt starten.
+      ScrollTrigger.refresh();
+      if (st.isActive || st.progress > 0) {
+        st.kill();
+        hochzaehlen();
+      }
     }, el);
 
-    ScrollTrigger.refresh();
     return () => ctx.revert();
   }, [to, prefix, suffix, duration]);
 
