@@ -66,11 +66,15 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
 
   const solid = scrolled || open;
 
+  // Beim Scrollen wird die Leiste dunkelblau statt weiß. Über den hellen
+  // Abschnitten der Seite ging eine weiße Leiste optisch unter, erkennbar war
+  // nur noch der Schatten. Dunkelblau bleibt auf hellem wie auf dunklem
+  // Untergrund sichtbar, und die Schrift kann in beiden Zuständen weiß bleiben.
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         solid
-          ? "bg-white/95 backdrop-blur shadow-[0_4px_24px_-12px_rgba(28,45,90,0.35)]"
+          ? "bg-navy/95 backdrop-blur shadow-[0_4px_24px_-12px_rgba(19,31,61,0.55)]"
           : "bg-transparent"
       }`}
     >
@@ -80,16 +84,14 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
             <img
               src={logoOverride.src}
               alt={logoOverride.alt}
-              className={`h-10 w-auto md:h-12 transition ${solid ? "" : "[filter:brightness(0)_invert(1)]"}`}
+              className="h-10 w-auto md:h-12 [filter:brightness(0)_invert(1)]"
             />
           ) : (
             <Image
               src={logo}
               alt="Flixwork"
               priority
-              className={`h-10 w-auto md:h-12 transition ${
-                solid ? "" : "[filter:brightness(0)_invert(1)]"
-              }`}
+              className="h-10 w-auto md:h-12 [filter:brightness(0)_invert(1)]"
             />
           )}
         </a>
@@ -101,9 +103,7 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
               key={l.label}
               href={l.href}
               {...(l.external ? { target: "_blank", rel: "noopener" } : {})}
-              className={`text-sm font-medium transition-colors ${
-                solid ? "text-navy/80 hover:text-navy" : "text-white/85 hover:text-white"
-              }`}
+              className="text-sm font-medium text-white/85 transition-colors hover:text-white"
             >
               {l.label}
             </a>
@@ -117,9 +117,7 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
                 target="_blank"
                 rel="noopener"
                 aria-label={s.label}
-                className={`transition-colors ${
-                  solid ? "text-navy/60 hover:text-sky" : "text-white/70 hover:text-white"
-                }`}
+                className="text-white/70 transition-colors hover:text-white"
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
                   <path d={s.path} />
@@ -142,9 +140,7 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
           onClick={() => setOpen((v) => !v)}
           aria-label="Menü"
           aria-expanded={open}
-          className={`lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg ${
-            solid ? "text-navy" : "text-white"
-          }`}
+          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg text-white"
         >
           <span className="relative block h-4 w-6">
             <span
@@ -168,7 +164,7 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
 
       {/* Mobile panel */}
       {open && (
-        <div className="lg:hidden border-t border-navy/10 bg-white px-5 pb-6 pt-2">
+        <div className="lg:hidden border-t border-white/10 bg-navy px-5 pb-6 pt-2">
           <div className="flex flex-col">
             {links.map((l) => (
               <a
@@ -176,7 +172,7 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
                 href={l.href}
                 {...(l.external ? { target: "_blank", rel: "noopener" } : {})}
                 onClick={() => setOpen(false)}
-                className="border-b border-navy/5 py-3 text-base font-medium text-navy/90"
+                className="border-b border-white/10 py-3 text-base font-medium text-white/90"
               >
                 {l.label}
               </a>
@@ -191,7 +187,7 @@ export default function Navbar({ logoOverride, variant = "unternehmen" }) {
           </a>
           <div className="mt-5 flex items-center justify-center gap-6">
             {socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener" aria-label={s.label} className="text-navy/60">
+              <a key={s.label} href={s.href} target="_blank" rel="noopener" aria-label={s.label} className="text-white/70">
                 <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
                   <path d={s.path} />
                 </svg>
